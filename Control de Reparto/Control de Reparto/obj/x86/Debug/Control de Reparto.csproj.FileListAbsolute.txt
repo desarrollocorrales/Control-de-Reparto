@@ -1,0 +1,7 @@
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\Control de Reparto.exe
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\Control de Reparto.pdb
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control_de_Reparto.Properties.Resources.resources
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control de Reparto.csproj.GenerateResource.Cache
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control de Reparto.exe
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control de Reparto.pdb
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control_de_Reparto.GUIs.FrmPrincipal.resources
