@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using Control_de_Reparto.GUIs;
 
 namespace Control_de_Reparto
 {
@@ -15,7 +16,7 @@ namespace Control_de_Reparto
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GUIs.FrmPrincipal());
+            Application.Run(new Frm_Principal());
         }
     }
 }
