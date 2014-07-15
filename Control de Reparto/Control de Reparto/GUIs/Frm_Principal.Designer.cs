@@ -43,12 +43,14 @@
             this.colClaveCliente = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colNombreCliente = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colImporte = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSaldo = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridFacturas = new DevExpress.XtraGrid.GridControl();
             this.gvFacturas = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colFolio1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colClaveCliente1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colNombreCliente1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colImporte1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSaldo1 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.label2 = new System.Windows.Forms.Label();
             this.btnImprimir = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
@@ -65,7 +67,7 @@
             // 
             this.lblTitulo.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblTitulo.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitulo.Location = new System.Drawing.Point(283, 9);
+            this.lblTitulo.Location = new System.Drawing.Point(280, 9);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(225, 30);
             this.lblTitulo.TabIndex = 1;
@@ -102,12 +104,11 @@
             // 
             // btnConfigurar
             // 
-            this.btnConfigurar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConfigurar.Location = new System.Drawing.Point(672, 12);
+            this.btnConfigurar.Image = global::Control_de_Reparto.Properties.Resources.engranaje_30;
+            this.btnConfigurar.Location = new System.Drawing.Point(3, 3);
             this.btnConfigurar.Name = "btnConfigurar";
-            this.btnConfigurar.Size = new System.Drawing.Size(100, 40);
+            this.btnConfigurar.Size = new System.Drawing.Size(45, 64);
             this.btnConfigurar.TabIndex = 30;
-            this.btnConfigurar.Text = "Configurar";
             this.btnConfigurar.UseVisualStyleBackColor = true;
             this.btnConfigurar.Click += new System.EventHandler(this.btnConfigurar_Click);
             // 
@@ -126,9 +127,9 @@
             // 
             this.lblSucursal.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblSucursal.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSucursal.Location = new System.Drawing.Point(123, 39);
+            this.lblSucursal.Location = new System.Drawing.Point(54, 39);
             this.lblSucursal.Name = "lblSucursal";
-            this.lblSucursal.Size = new System.Drawing.Size(538, 22);
+            this.lblSucursal.Size = new System.Drawing.Size(676, 22);
             this.lblSucursal.TabIndex = 6;
             this.lblSucursal.Text = "Sucursal";
             this.lblSucursal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -156,7 +157,8 @@
             this.colFolio,
             this.colClaveCliente,
             this.colNombreCliente,
-            this.colImporte});
+            this.colImporte,
+            this.colSaldo});
             this.gvFacturaEncontrada.GridControl = this.gridFacturaEncontrada;
             this.gvFacturaEncontrada.Name = "gvFacturaEncontrada";
             this.gvFacturaEncontrada.OptionsBehavior.Editable = false;
@@ -193,6 +195,15 @@
             this.colImporte.Visible = true;
             this.colImporte.VisibleIndex = 3;
             // 
+            // colSaldo
+            // 
+            this.colSaldo.DisplayFormat.FormatString = "C";
+            this.colSaldo.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colSaldo.FieldName = "Saldo";
+            this.colSaldo.Name = "colSaldo";
+            this.colSaldo.Visible = true;
+            this.colSaldo.VisibleIndex = 4;
+            // 
             // gridFacturas
             // 
             this.gridFacturas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -213,7 +224,8 @@
             this.colFolio1,
             this.colClaveCliente1,
             this.colNombreCliente1,
-            this.colImporte1});
+            this.colImporte1,
+            this.colSaldo1});
             this.gvFacturas.GridControl = this.gridFacturas;
             this.gvFacturas.Name = "gvFacturas";
             this.gvFacturas.OptionsBehavior.Editable = false;
@@ -250,6 +262,15 @@
             this.colImporte1.Visible = true;
             this.colImporte1.VisibleIndex = 3;
             // 
+            // colSaldo1
+            // 
+            this.colSaldo1.DisplayFormat.FormatString = "C";
+            this.colSaldo1.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.colSaldo1.FieldName = "Saldo";
+            this.colSaldo1.Name = "colSaldo1";
+            this.colSaldo1.Visible = true;
+            this.colSaldo1.VisibleIndex = 4;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -268,6 +289,7 @@
             this.btnImprimir.TabIndex = 10;
             this.btnImprimir.Text = "Imprimir";
             this.btnImprimir.UseVisualStyleBackColor = true;
+            this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
             // 
             // btnAgregar
             // 
@@ -351,5 +373,7 @@
         private System.Windows.Forms.Button btnImprimir;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnQuitar;
+        private DevExpress.XtraGrid.Columns.GridColumn colSaldo;
+        private DevExpress.XtraGrid.Columns.GridColumn colSaldo1;
     }
 }

@@ -147,5 +147,40 @@ namespace Control_de_Reparto.GUIs
             if (_lstFacturas.Count == 0)
                 btnQuitar.Enabled = false;
         }
+
+        private void btnImprimir_Click(object sender, EventArgs e)
+        {
+            Imprimir();
+        }
+        private void Imprimir()
+        {
+            SqliteDAL sqlitedal = new SqliteDAL();
+            //Recuperar todas las facturas impresas en el dia.
+            List<Factura> lstFacturasYaImpresas = sqlitedal.ObtenerFacturasImpresasDelDia();
+            
+            //Borrar las facturas que ya se imprimieron de las facturas tecleadas.
+            foreach(Factura fact in lstFacturasYaImpresas){
+                _lstFacturas.RemoveAll(o => o.ID_Factura == fact.ID_Factura);
+            }
+
+            _lstFacturas.AddRange(lstFacturasYaImpresas);
+            _lstFacturas = _lstFacturas.OrderBy(o => o.Folio).ToList();
+
+
+            //Insertar las facturas al Excel
+            ExcelDAL xlDal = new ExcelDAL();
+            xlDal.CargarDatos(_lstFacturas);
+
+            //Insertar facturas a la base de datos
+            
+
+            //Insertar las facturas nuevas al Excel
+            //Mostrar el excel en pantalla
+        }
+        private void ObtenerFacturasImpresasDelDia()
+        {
+            DateTime hoy = DateTime.Today;
+
+        }
     }
 }

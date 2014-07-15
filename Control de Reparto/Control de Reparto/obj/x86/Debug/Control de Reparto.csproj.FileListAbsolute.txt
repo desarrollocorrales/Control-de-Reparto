@@ -22,3 +22,12 @@ D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug
 D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\BD\ControlDeReparto.sqlite
 D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control de Reparto.csprojResolveAssemblyReference.cache
 D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control de Reparto.exe.licenses
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\ExcelApi.dll
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\NetOffice.dll
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\OfficeApi.dll
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\VBIDEApi.dll
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\ExcelApi.xml
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\NetOffice.xml
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\OfficeApi.xml
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\VBIDEApi.xml
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control_de_Reparto.GUIs.Form1.resources

@@ -46,8 +46,20 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net40\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="ExcelApi">
+      <HintPath>..\packages\NetOffice.Excel.Net30.1.6.0.0\lib\net30\ExcelApi.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
     <Reference Include="FirebirdSql.Data.FirebirdClient">
       <HintPath>..\packages\FirebirdSql.Data.FirebirdClient.4.2.0.0\lib\net40-client\FirebirdSql.Data.FirebirdClient.dll</HintPath>
+    </Reference>
+    <Reference Include="NetOffice">
+      <HintPath>..\packages\NetOffice.Core.Net30.1.6.0.0\lib\net30\NetOffice.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="OfficeApi">
+      <HintPath>..\packages\NetOffice.Core.Net30.1.6.0.0\lib\net30\OfficeApi.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -69,9 +81,14 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="VBIDEApi">
+      <HintPath>..\packages\NetOffice.Core.Net30.1.6.0.0\lib\net30\VBIDEApi.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\Configuracion.cs" />
+    <Compile Include="DAL\ExcelDAL.cs" />
     <Compile Include="DAL\FirebirdDAL.cs" />
     <Compile Include="DAL\SqliteDAL.cs" />
     <Compile Include="GUIs\ConfiguracionMicrosip.cs">
@@ -79,6 +96,12 @@
     </Compile>
     <Compile Include="GUIs\ConfiguracionMicrosip.Designer.cs">
       <DependentUpon>ConfiguracionMicrosip.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUIs\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIs\Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="GUIs\Frm_Principal.cs">
       <SubType>Form</SubType>
@@ -92,6 +115,9 @@
     <EmbeddedResource Include="GUIs\ConfiguracionMicrosip.resx">
       <DependentUpon>ConfiguracionMicrosip.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUIs\Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUIs\Frm_Principal.resx">
       <DependentUpon>Frm_Principal.cs</DependentUpon>
     </EmbeddedResource>
@@ -104,6 +130,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
     <None Include="BD\ControlDeReparto.sqlite">
@@ -122,6 +149,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\home-engranaje.png" />
+    <None Include="Resources\engranaje.30.png" />
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

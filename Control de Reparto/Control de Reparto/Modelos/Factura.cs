@@ -12,6 +12,8 @@ namespace Control_de_Reparto.Modelos
         public string ClaveCliente { set; get; }
         public string NombreCliente { set; get; }
         public decimal Importe { set; get; }
+        public decimal Saldo { set; get; }
         public char TipoImporte { set; get; }
+        public bool Reimpresion { set; get; }
     }
 }

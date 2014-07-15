@@ -94,13 +94,15 @@ namespace Control_de_Reparto.DAL
                 oFactura.TipoImporte = Convert.ToChar(row["TIPO_IMPTE"]);
                 if (oFactura.TipoImporte == 'R')
                 {
-                    oFactura.Importe = 0 - Convert.ToDecimal(row["IMPORTE"]);
+                    oFactura.Saldo = 0 - Convert.ToDecimal(row["IMPORTE"]);
                 }
                 else
                 {
+                    oFactura.Saldo = Convert.ToDecimal(row["IMPORTE"]);
                     oFactura.Importe = Convert.ToDecimal(row["IMPORTE"]);
                 }
 
+                oFactura.Reimpresion = false;
                 lstFacturas.Add(oFactura);
             }
 
@@ -116,6 +118,7 @@ namespace Control_de_Reparto.DAL
                 FacturaFinal.NombreCliente = lstFacturas[0].NombreCliente;
                 FacturaFinal.TipoImporte = 'C';
                 FacturaFinal.Importe = lstFacturas.Sum(o => o.Importe);
+                FacturaFinal.Saldo = lstFacturas.Sum(o => o.Saldo);
                 return FacturaFinal;
             }
             else
