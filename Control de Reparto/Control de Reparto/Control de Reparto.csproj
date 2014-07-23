@@ -33,6 +33,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Carrito.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Control_de_Reparto.Program</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Data.v11.1, Version=11.1.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.Printing.v11.1.Core, Version=11.1.9.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
@@ -97,12 +103,6 @@
     <Compile Include="GUIs\ConfiguracionMicrosip.Designer.cs">
       <DependentUpon>ConfiguracionMicrosip.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUIs\Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUIs\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="GUIs\Frm_Principal.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -114,9 +114,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="GUIs\ConfiguracionMicrosip.resx">
       <DependentUpon>ConfiguracionMicrosip.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="GUIs\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUIs\Frm_Principal.resx">
       <DependentUpon>Frm_Principal.cs</DependentUpon>
@@ -133,9 +130,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
-    <None Include="BD\ControlDeReparto.sqlite">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <None Include="BD\ControlDeReparto.db3" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Control_de_Reparto.Modelos.Factura.datasource" />
     <None Include="Properties\Settings.settings">
@@ -151,6 +146,7 @@
   <ItemGroup>
     <None Include="Resources\home-engranaje.png" />
     <None Include="Resources\engranaje.30.png" />
+    <Content Include="Carrito.ico" />
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

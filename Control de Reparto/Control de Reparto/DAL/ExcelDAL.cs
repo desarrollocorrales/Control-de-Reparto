@@ -55,12 +55,12 @@ namespace Control_de_Reparto.DAL
                 Hoja.Range(string.Format("G{0}", renglon)).Value = factura.Folio;
 
                 Hoja.Range(string.Format("H{0}", renglon)).Value = factura.Importe;
+                Hoja.Range(string.Format("H{0}", renglon)).Style = Libro.Styles["Currency"];
                 Hoja.Range(string.Format("H{0}", renglon)).HorizontalAlignment = XlHAlign.xlHAlignRight;
                 Hoja.Range(string.Format("I{0}", renglon)).Value = factura.Saldo;
+                Hoja.Range(string.Format("I{0}", renglon)).Style = Libro.Styles["Currency"];
                 Hoja.Range(string.Format("I{0}", renglon)).HorizontalAlignment = XlHAlign.xlHAlignRight;
-
                 
-
                 renglon++;
                 contadorRenglones++;
             }

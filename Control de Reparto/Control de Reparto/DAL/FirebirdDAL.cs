@@ -88,9 +88,9 @@ namespace Control_de_Reparto.DAL
             {
                 oFactura = new Factura();
                 oFactura.ID_Factura = Convert.ToInt32(row["DOCTO_CC_ID"]);
-                oFactura.Folio = Folio;
-                oFactura.ClaveCliente = Convert.ToString(row["CLAVE_CLIENTE"]);
-                oFactura.NombreCliente = Convert.ToString(row["NOMBRE_CLIENTE"]);                
+                oFactura.Folio = Folio.Trim();
+                oFactura.ClaveCliente = Convert.ToString(row["CLAVE_CLIENTE"]).Trim();
+                oFactura.NombreCliente = Convert.ToString(row["NOMBRE_CLIENTE"]).Trim();                
                 oFactura.TipoImporte = Convert.ToChar(row["TIPO_IMPTE"]);
                 if (oFactura.TipoImporte == 'R')
                 {

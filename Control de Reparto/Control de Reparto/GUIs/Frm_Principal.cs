@@ -23,33 +23,6 @@ namespace Control_de_Reparto.GUIs
             _lstFacturas = new List<Factura>();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                SQLiteConnection dbconn = new SQLiteConnection();
-                dbconn.ConnectionString = "Data Source=.\\BD\\ControlDeReparto.sqlite;Version=3;";
-                dbconn.Open();                
-                
-                SQLiteCommand dbCommand = new SQLiteCommand();
-                dbCommand.Connection = dbconn;
-                dbCommand.CommandText = "Select * From manejo_impresiones";
-
-                DataTable dt = new DataTable();
-                SQLiteDataAdapter adapter = new SQLiteDataAdapter();
-                adapter.SelectCommand = dbCommand;
-                adapter.Fill(dt);
-
-                dbconn.Close();
-
-                MessageBox.Show("Se conecto a la base de datos!!! " + dt.Rows[0]["folio_factura"]);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
-
         private void btnConfigurar_Click(object sender, EventArgs e)
         {
             new ConfiguracionMicrosip().ShowDialog();
@@ -73,10 +46,9 @@ namespace Control_de_Reparto.GUIs
         }
         private void BuscarFactura()
         {
-            FirebirdDAL fbDAL = new FirebirdDAL();
-
             try
             {
+                FirebirdDAL fbDAL = new FirebirdDAL();
                 Factura factura = fbDAL.BuscarFactura(txbFolio.Text);
 
                 if (factura != null)
@@ -124,11 +96,15 @@ namespace Control_de_Reparto.GUIs
         }
         private void Agregar()
         {
-            _lstFacturas.Add(_FacturaEncontrada);
-            gridFacturas.DataSource = _lstFacturas.Distinct().ToList();
-            gvFacturas.RefreshData();
-            gvFacturas.BestFitColumns();
-            btnQuitar.Enabled = true;
+            Factura factura = _lstFacturas.Find(o => o.Folio == _FacturaEncontrada.Folio);
+            if (factura == null)
+            {
+                _lstFacturas.Add(_FacturaEncontrada);
+                gridFacturas.DataSource = _lstFacturas;
+                gvFacturas.RefreshData();
+                gvFacturas.BestFitColumns();
+                btnQuitar.Enabled = true;
+            }
         }
 
         private void btnQuitar_Click(object sender, EventArgs e)
@@ -154,33 +130,50 @@ namespace Control_de_Reparto.GUIs
         }
         private void Imprimir()
         {
-            SqliteDAL sqlitedal = new SqliteDAL();
-            //Recuperar todas las facturas impresas en el dia.
-            List<Factura> lstFacturasYaImpresas = sqlitedal.ObtenerFacturasImpresasDelDia();
-            
-            //Borrar las facturas que ya se imprimieron de las facturas tecleadas.
-            foreach(Factura fact in lstFacturasYaImpresas){
-                _lstFacturas.RemoveAll(o => o.ID_Factura == fact.ID_Factura);
+            try
+            {
+                SqliteDAL SQLite_DAL = new SqliteDAL();
+                //Recuperar todas las facturas impresas en el dia.
+                List<Factura> lstFacturasYaImpresas = SQLite_DAL.ObtenerFacturasImpresasDelDia();
+
+                //Generar Lista de facturas a imprimir
+                List<Factura> lstFacturasAImprimir = new List<Factura>();
+                lstFacturasAImprimir.AddRange(_lstFacturas);
+
+                //Borrar las facturas que ya se imprimieron de las facturas tecleadas.
+                foreach (Factura fact in lstFacturasYaImpresas)
+                {
+                    lstFacturasAImprimir.RemoveAll(o => o.Folio == fact.Folio);
+                }
+                List<Factura> lstFacturasAInsertar = new List<Factura>();
+                lstFacturasAInsertar.AddRange(lstFacturasAImprimir);
+
+                lstFacturasAImprimir.AddRange(lstFacturasYaImpresas);
+                lstFacturasAImprimir = lstFacturasAImprimir.OrderBy(o => o.Folio).ToList();
+
+                //Insertar las facturas al Excel
+                ExcelDAL Excel_DAL = new ExcelDAL();
+                Excel_DAL.CargarDatos(lstFacturasAImprimir);
+
+                //Insertar facturas a la base de datos
+                SQLite_DAL.InsertarFacturasALaBD(lstFacturasAInsertar);
+
+                //Mostrar el excel en pantalla
+                MessageBox.Show("El documento se ha creado con exito", "OK", 
+                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+            catch (Exception ex)
+            {
+                StringBuilder sb = new StringBuilder();
+                Exception e = ex;
+                while (e != null)
+                {
+                    sb.AppendLine(e.Message);
+                    e = e.InnerException;
+                }
 
-            _lstFacturas.AddRange(lstFacturasYaImpresas);
-            _lstFacturas = _lstFacturas.OrderBy(o => o.Folio).ToList();
-
-
-            //Insertar las facturas al Excel
-            ExcelDAL xlDal = new ExcelDAL();
-            xlDal.CargarDatos(_lstFacturas);
-
-            //Insertar facturas a la base de datos
-            
-
-            //Insertar las facturas nuevas al Excel
-            //Mostrar el excel en pantalla
-        }
-        private void ObtenerFacturasImpresasDelDia()
-        {
-            DateTime hoy = DateTime.Today;
-
+                MessageBox.Show(sb.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
