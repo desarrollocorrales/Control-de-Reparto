@@ -161,6 +161,8 @@ namespace Control_de_Reparto.GUIs
                 //Mostrar el excel en pantalla
                 MessageBox.Show("El documento se ha creado con exito", "OK", 
                                  MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                System.Diagnostics.Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\ControlReparto.xlsx");
             }
             catch (Exception ex)
             {

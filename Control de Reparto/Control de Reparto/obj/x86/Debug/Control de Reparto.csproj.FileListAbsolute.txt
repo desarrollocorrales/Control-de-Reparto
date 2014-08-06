@@ -28,3 +28,4 @@ D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\Exc
 D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\NetOffice.xml
 D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\OfficeApi.xml
 D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\VBIDEApi.xml
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control de Reparto.csprojResolveAssemblyReference.cache
