@@ -103,11 +103,11 @@
     <Compile Include="GUIs\ConfiguracionMicrosip.Designer.cs">
       <DependentUpon>ConfiguracionMicrosip.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUIs\Frm_Principal.cs">
+    <Compile Include="GUIs\Frm_Reparto.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUIs\Frm_Principal.Designer.cs">
-      <DependentUpon>Frm_Principal.cs</DependentUpon>
+    <Compile Include="GUIs\Frm_Reparto.Designer.cs">
+      <DependentUpon>Frm_Reparto.cs</DependentUpon>
     </Compile>
     <Compile Include="Modelos\Factura.cs" />
     <Compile Include="Program.cs" />
@@ -115,8 +115,8 @@
     <EmbeddedResource Include="GUIs\ConfiguracionMicrosip.resx">
       <DependentUpon>ConfiguracionMicrosip.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUIs\Frm_Principal.resx">
-      <DependentUpon>Frm_Principal.cs</DependentUpon>
+    <EmbeddedResource Include="GUIs\Frm_Reparto.resx">
+      <DependentUpon>Frm_Reparto.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -130,6 +130,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
+    <None Include="BD\ControlDeCobranza.db3" />
     <None Include="BD\ControlDeReparto.db3" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Control_de_Reparto.Modelos.Factura.datasource" />
@@ -146,6 +147,7 @@
   <ItemGroup>
     <None Include="Resources\home-engranaje.png" />
     <None Include="Resources\engranaje.30.png" />
+    <None Include="cargando.gif" />
     <Content Include="Carrito.ico" />
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

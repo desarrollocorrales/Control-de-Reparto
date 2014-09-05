@@ -11,13 +11,13 @@ namespace Control_de_Reparto.DAL
 {
     public class ExcelDAL
     {
-        public void CargarDatos(List<Factura> lstFacturas)
+        public void CargarDatos(List<Factura> lstFacturas, string NombreArchivo)
         {
             Excel.Application AplicacionExcel = new Excel.Application();
             AplicacionExcel.DisplayAlerts = false;
             AplicacionExcel.Visible = false;
-            
-            Excel.Workbook Libro = AplicacionExcel.Workbooks.Open(Environment.CurrentDirectory + "\\Control de reparto.xlsx");
+
+            Excel.Workbook Libro = AplicacionExcel.Workbooks.Open(Environment.CurrentDirectory + "\\" + NombreArchivo);
             Excel.Worksheet Hoja = (Excel.Worksheet)Libro.Sheets[1];
 
             int renglon = 8;
@@ -65,7 +65,7 @@ namespace Control_de_Reparto.DAL
                 contadorRenglones++;
             }
 
-            Libro.SaveAs(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\ControlReparto.xlsx");
+            Libro.SaveAs(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\" + NombreArchivo);
 
             AplicacionExcel.Quit();
             AplicacionExcel.Dispose();

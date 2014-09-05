@@ -14,13 +14,13 @@ namespace Control_de_Reparto.DAL
         private SQLiteCommand Comando;
         private SQLiteDataAdapter Adapter;
 
-        public SqliteDAL()
+        public SqliteDAL(string BaseDeDatos)
         {
             Conexion = new SQLiteConnection();
             Comando = new SQLiteCommand();
             Adapter = new SQLiteDataAdapter();
 
-            Conexion.ConnectionString = "Data Source=.\\BD\\ControlDeReparto.db3;Version=3;";
+            Conexion.ConnectionString = "Data Source=.\\BD\\"+BaseDeDatos+";Version=3;";
         }
 
         public List<Factura> ObtenerFacturasImpresasDelDia()

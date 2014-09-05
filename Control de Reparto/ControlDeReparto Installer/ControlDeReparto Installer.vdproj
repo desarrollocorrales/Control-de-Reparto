@@ -99,6 +99,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_2A71B5E6287E4C6FB72FDE1315375846"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_2B4DBF0C77CF277011EE7C3F20F9EC2F"
         "OwnerKey" = "8:_60FDDFE7FE3F964B4ACD03A5F280B232"
         "MsmSig" = "8:_UNDEFINED"
@@ -113,12 +119,6 @@
         {
         "MsmKey" = "8:_400746B42CBE4AA78399CC6010ACECDC"
         "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_575296EF0C83CF6CF4D62A0AC31F2425"
-        "OwnerKey" = "8:_ABD45F29B5453E68FC5E2F60CA43D59B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -239,6 +239,12 @@
         {
         "MsmKey" = "8:_ABD45F29B5453E68FC5E2F60CA43D59B"
         "OwnerKey" = "8:_07B983C4FA594F5E9F391386F5E5EBCA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_AC918FCAE28341128CA54B96BA1B839D"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -664,6 +670,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_2A71B5E6287E4C6FB72FDE1315375846"
+            {
+            "SourcePath" = "8:..\\Control de Reparto\\Control de cobranza.xlsx"
+            "TargetName" = "8:Control de cobranza.xlsx"
+            "Tag" = "8:"
+            "Folder" = "8:_32FE9274E5F5488CB00F89103FD97029"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_2B4DBF0C77CF277011EE7C3F20F9EC2F"
             {
             "AssemblyRegister" = "3:1"
@@ -713,26 +739,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_575296EF0C83CF6CF4D62A0AC31F2425"
-            {
-            "SourcePath" = "8:EXCEL.EXE"
-            "TargetName" = "8:EXCEL.EXE"
-            "Tag" = "8:"
-            "Folder" = "8:_32FE9274E5F5488CB00F89103FD97029"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_60FDDFE7FE3F964B4ACD03A5F280B232"
@@ -990,6 +996,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_AC918FCAE28341128CA54B96BA1B839D"
+            {
+            "SourcePath" = "8:..\\Control de Reparto\\BD\\ControlDeCobranza.db3"
+            "TargetName" = "8:ControlDeCobranza.db3"
+            "Tag" = "8:"
+            "Folder" = "8:_55A7C1F70E814300BC78133817A9257B"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_B488B038A4095D0B5A176A236F90B0C7"

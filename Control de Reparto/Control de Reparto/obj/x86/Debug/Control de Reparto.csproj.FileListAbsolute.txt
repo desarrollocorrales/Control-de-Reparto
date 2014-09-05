@@ -5,27 +5,26 @@ D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\Con
 D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\Control de Reparto.pdb
 D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\EntityFramework.dll
 D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\EntityFramework.SqlServer.dll
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\ExcelApi.dll
 D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\FirebirdSql.Data.FirebirdClient.dll
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\NetOffice.dll
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\OfficeApi.dll
 D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\System.Data.SQLite.dll
 D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\System.Data.SQLite.EF6.dll
 D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\System.Data.SQLite.Linq.dll
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\VBIDEApi.dll
 D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\EntityFramework.xml
 D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\EntityFramework.SqlServer.xml
-D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\FirebirdSql.Data.FirebirdClient.pdb
-D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\System.Data.SQLite.xml
-D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control_de_Reparto.GUIs.ConfiguracionMicrosip.resources
-D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control_de_Reparto.GUIs.Frm_Principal.resources
-D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control_de_Reparto.Properties.Resources.resources
-D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control de Reparto.csproj.GenerateResource.Cache
-D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control de Reparto.exe
-D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control de Reparto.pdb
-D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control de Reparto.exe.licenses
-D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\ExcelApi.dll
-D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\NetOffice.dll
-D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\OfficeApi.dll
-D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\VBIDEApi.dll
 D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\ExcelApi.xml
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\FirebirdSql.Data.FirebirdClient.pdb
 D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\NetOffice.xml
 D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\OfficeApi.xml
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\System.Data.SQLite.xml
 D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\VBIDEApi.xml
-D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control de Reparto.csprojResolveAssemblyReference.cache
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control_de_Reparto.GUIs.ConfiguracionMicrosip.resources
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control_de_Reparto.GUIs.Frm_Reparto.resources
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control_de_Reparto.Properties.Resources.resources
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control de Reparto.csproj.GenerateResource.Cache
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control de Reparto.exe.licenses
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control de Reparto.exe
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control de Reparto.pdb
