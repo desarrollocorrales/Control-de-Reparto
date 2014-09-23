@@ -63,6 +63,16 @@ namespace Control_de_Reparto.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Add_Male_User_icon {
+            get {
+                object obj = ResourceManager.GetObject("Add-Male-User-icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cargando {
             get {
                 object obj = ResourceManager.GetObject("cargando", resourceCulture);

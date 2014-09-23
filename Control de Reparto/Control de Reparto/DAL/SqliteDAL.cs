@@ -61,7 +61,7 @@ namespace Control_de_Reparto.DAL
             return lstFacturasYaImpresas;
         }
 
-        public void InsertarFacturasALaBD(List<Factura> lstFacturas)
+        public void InsertarFacturasALaBD(List<Factura> lstFacturas, int FolioControl, int ID_Encargado, int ID_Chofer)
         {
             Conexion.Open();
             IDbTransaction Transaccion = Conexion.BeginTransaction();
@@ -75,12 +75,14 @@ namespace Control_de_Reparto.DAL
                         string.Format(@"INSERT INTO 
                                           manejo_impresiones
                                             (folio_factura, importe_factura, fecha_impresion, 
-                                             clave_cliente, nombre_cliente, saldo_factura)
+                                             clave_cliente, nombre_cliente, saldo_factura, folio_control,
+                                             id_encargado, id_chofer)
                                         VALUES
                                             ('{0}', {1}, '{2}', 
-                                             '{3}', '{4}', {5})",
+                                             '{3}', '{4}', {5}, {6}, {7}, {8})",
                                               factura.Folio, factura.Importe, DateTime.Today.ToString("yyyy-MM-dd"),
-                                              factura.ClaveCliente, factura.NombreCliente, factura.Saldo);
+                                              factura.ClaveCliente, factura.NombreCliente, factura.Saldo,
+                                              FolioControl, ID_Encargado, ID_Chofer);
                     Comando.ExecuteNonQuery();
                 }
 
@@ -93,6 +95,131 @@ namespace Control_de_Reparto.DAL
                 Conexion.Close();
                 throw ex;
             }
+        }
+
+        public List<Personal> ObtenerPersonal()
+        {
+            List<Personal> lstPersonal = new List<Personal>();
+
+            Conexion.Open();
+            Comando.Connection = Conexion;
+            Comando.CommandText =
+            string.Format(@"SELECT id_personal, nombre, tipo FROM personal WHERE status = 1");
+
+            DataTable dt = new DataTable();
+            Adapter.SelectCommand = Comando;
+            Adapter.Fill(dt);
+
+            Personal persona;
+            foreach (DataRow row in dt.Rows)
+            {
+                persona = new Personal();
+                persona.ID_Personal = Convert.ToInt32(row["id_personal"]);
+                persona.Nombre = Convert.ToString(row["nombre"]);
+                string tipo = Convert.ToString(row["tipo"]);
+                switch (tipo)
+                {
+                    case "C": persona.Tipo = "Chofer"; break;
+                    case "R": persona.Tipo = "Responsable"; break;
+                }
+
+                lstPersonal.Add(persona);
+            }
+
+            Conexion.Close();
+
+            return lstPersonal;
+        }
+        public List<Personal> ObtenerPersonalPorTipo(char Tipo)
+        {
+            List<Personal> lstPersonal = new List<Personal>();
+
+            Conexion.Open();
+            Comando.Connection = Conexion;
+            Comando.CommandText =
+            string.Format(@"SELECT id_personal, nombre, tipo FROM personal WHERE tipo LIKE '{0}' AND status = 1", Tipo);
+
+            DataTable dt = new DataTable();
+            Adapter.SelectCommand = Comando;
+            Adapter.Fill(dt);
+
+            Personal persona;
+            foreach (DataRow row in dt.Rows)
+            {
+                persona = new Personal();
+                persona.ID_Personal = Convert.ToInt32(row["id_personal"]);
+                persona.Nombre = Convert.ToString(row["nombre"]);
+                string tipo = Convert.ToString(row["tipo"]);
+                switch (tipo)
+                {
+                    case "C": persona.Tipo = "Chofer"; break;
+                    case "R": persona.Tipo = "Responsable"; break;
+                }
+
+                lstPersonal.Add(persona);
+            }
+
+            Conexion.Close();
+
+            return lstPersonal;
+        }
+        public void AgregarPersona(string Nombre, char Tipo)
+        {
+            List<Personal> lstPersonal = new List<Personal>();
+
+            Conexion.Open();
+            Comando.Connection = Conexion;
+            Comando.CommandText =
+            string.Format(@"INSERT INTO personal (nombre, tipo) VALUES ('{0}', '{1}')", Nombre, Tipo);
+            Comando.ExecuteNonQuery();        
+
+            Conexion.Close();
+        }
+
+        public int ObtenerFolio()
+        {
+            Conexion.Open();
+            Comando.Connection = Conexion;
+            Comando.CommandText =
+            string.Format(@"SELECT 
+                                  IFNULL(MAX(folio_control), 0) 
+                              FROM 
+                                  manejo_impresiones");
+            object obj = Comando.ExecuteScalar();
+            int Folio = Convert.ToInt32(obj);
+            Folio++;
+
+            Conexion.Close();
+
+            return Folio;
+        }
+
+        public void ModificarPersonal(Personal persona)
+        {
+            Conexion.Open();
+            Comando.Connection = Conexion;
+            Comando.CommandText =
+            string.Format(@"UPDATE personal 
+                               SET nombre = '{0}', Tipo = '{1}' 
+                             WHERE id_personal= {2} ", 
+                                   persona.Nombre, persona.Tipo, persona.ID_Personal);
+            Comando.ExecuteNonQuery();
+
+            Conexion.Close();
+        }
+
+        public void EliminarPersonal(Personal persona)
+        {
+            Conexion.Open();
+            Comando.Connection = Conexion;
+            Comando.CommandText =
+            string.Format(@"UPDATE personal 
+                               SET status = 0  
+                             WHERE id_personal= {2} ",
+                                   persona.Nombre, persona.Tipo, persona.ID_Personal);
+            Comando.ExecuteNonQuery();
+
+            Conexion.Close();
         }
     }
 }

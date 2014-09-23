@@ -11,7 +11,7 @@ namespace Control_de_Reparto.DAL
 {
     public class ExcelDAL
     {
-        public void CargarDatos(List<Factura> lstFacturas, string NombreArchivo)
+        public void CargarDatos(List<Factura> lstFacturas, string NombreArchivo, DatosComplementarios dc)
         {
             Excel.Application AplicacionExcel = new Excel.Application();
             AplicacionExcel.DisplayAlerts = false;
@@ -64,6 +64,11 @@ namespace Control_de_Reparto.DAL
                 renglon++;
                 contadorRenglones++;
             }
+
+            Hoja.UsedRange.Replace("{{PERSONAENTREGA}}", dc.Responsable);
+            Hoja.UsedRange.Replace("{{SUCURSAL}}", dc.Sucursal);
+            Hoja.UsedRange.Replace("{{CHOFER}}", dc.Chofer);
+            Hoja.UsedRange.Replace("{{FOLIO}}", dc.FolioControl.ToString().PadLeft(6,'0'));
 
             Libro.SaveAs(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\" + NombreArchivo);
 

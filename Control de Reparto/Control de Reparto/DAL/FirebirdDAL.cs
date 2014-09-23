@@ -60,7 +60,7 @@ namespace Control_de_Reparto.DAL
                 string.Format(@"SELECT 
                                   DOCTOS_CC.DOCTO_CC_ID,
                                   DOCTOS_CC.FOLIO,
-                                  IMPORTES_DOCTOS_CC.IMPORTE,
+                                  (IMPORTES_DOCTOS_CC.IMPORTE + IMPORTES_DOCTOS_CC.IMPUESTO) AS IMPORTE,
                                   IMPORTES_DOCTOS_CC.TIPO_IMPTE,
                                   IMPORTES_DOCTOS_CC.FECHA,
                                   COALESCE(CLAVES_CLIENTES.CLAVE_CLIENTE,'') AS CLAVE_CLIENTE,
@@ -75,10 +75,10 @@ namespace Control_de_Reparto.DAL
 
                                 UNION ALL
 
-                                SELECT 
+                        SELECT 
                                   DOCTOS_PV.DOCTO_PV_ID AS ID,
                                   DOCTOS_PV.FOLIO,
-                                  DOCTOS_PV.IMPORTE_NETO AS IMPORTE,
+                                  (DOCTOS_PV.TOTAL_IMPUESTOS + DOCTOS_PV.IMPORTE_NETO) AS IMPORTE,
                                   'C' AS TIPO_IMPTE,
                                   DOCTOS_PV.FECHA,
                                   'TICKET' AS CLAVE_CLIENTE,
@@ -86,7 +86,7 @@ namespace Control_de_Reparto.DAL
                                 FROM
                                   DOCTOS_PV
                                 WHERE
-                                  DOCTOS_PV.FOLIO LIKE '{1}'", FolioMicrosip, FolioTicket);
+                                  DOCTOS_PV.FOLIO LIKE '{1}' OR DOCTOS_PV.FOLIO LIKE '{0}'", FolioMicrosip, FolioTicket);
 
             /* Acceso a base de datos */
             Conexion.Open();
@@ -151,7 +151,7 @@ namespace Control_de_Reparto.DAL
                 string.Format(@"SELECT 
                                   DOCTOS_CC.DOCTO_CC_ID,
                                   DOCTOS_CC.FOLIO,
-                                  IMPORTES_DOCTOS_CC.IMPORTE,
+                                  (IMPORTES_DOCTOS_CC.IMPORTE + IMPORTES_DOCTOS_CC.IMPUESTO) AS IMPORTE,
                                   IMPORTES_DOCTOS_CC.TIPO_IMPTE,
                                   IMPORTES_DOCTOS_CC.FECHA,
                                   COALESCE(CLAVES_CLIENTES.CLAVE_CLIENTE,'') AS CLAVE_CLIENTE,

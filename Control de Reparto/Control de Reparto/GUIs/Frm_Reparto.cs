@@ -19,6 +19,8 @@ namespace Control_de_Reparto.GUIs
         private Factura _CobranzaEncontrada;
         private List<Factura> _lstFacturas;
         private List<Factura> _lstCobranza;
+        private Personal Encargado;
+        private Personal Chofer;
         public Frm_Reparto()
         {
             InitializeComponent();
@@ -37,10 +39,22 @@ namespace Control_de_Reparto.GUIs
 
         private void Frm_Principal_Load(object sender, EventArgs e)
         {
+            LlenarCombos();
+
             Configuracion oConfig = new Configuracion();
             oConfig.Load();
 
             lblSucursal.Text = oConfig.Sucursal;
+        }
+        private void LlenarCombos()
+        {
+            SqliteDAL sqlite = new SqliteDAL("ControlDeCobranza.db3");
+
+            cbResponsables.DataSource = sqlite.ObtenerPersonalPorTipo('R');
+            cbResponsables.DisplayMember = "Nombre";
+
+            cbChoferes.DataSource = sqlite.ObtenerPersonalPorTipo('C');
+            cbChoferes.DisplayMember = "Nombre";
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
@@ -117,7 +131,14 @@ namespace Control_de_Reparto.GUIs
 
         private void btnImprimir_Click(object sender, EventArgs e)
         {
-            Imprimir();
+            if (validarLista(gvFacturas))
+            {
+                Imprimir();
+            }
+            else
+            {
+                MessageBox.Show("No hay registros que imprimir", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void Imprimir()
         {
@@ -125,30 +146,28 @@ namespace Control_de_Reparto.GUIs
             try
             {
                 SqliteDAL SQLite_DAL = new SqliteDAL("ControlDeReparto.db3");
-                //Recuperar todas las facturas impresas en el dia.
-                List<Factura> lstFacturasYaImpresas = SQLite_DAL.ObtenerFacturasImpresasDelDia();
+                //Obtener folio.
+                int Folio = SQLite_DAL.ObtenerFolio();
+
+                //Llenar datos complementarios
+                DatosComplementarios datosComplementarios = new DatosComplementarios();
+                datosComplementarios.FolioControl = Folio;
+                datosComplementarios.Sucursal = Properties.Settings.Default.Sucursal;
+                datosComplementarios.Responsable = Encargado.Nombre;
+                datosComplementarios.Chofer = Chofer.Nombre;
 
                 //Generar Lista de facturas a imprimir
-                List<Factura> lstFacturasAImprimir = new List<Factura>();
-                lstFacturasAImprimir.AddRange(_lstFacturas);
-
-                //Borrar las facturas que ya se imprimieron de las facturas tecleadas.
-                foreach (Factura fact in lstFacturasYaImpresas)
-                {
-                    lstFacturasAImprimir.RemoveAll(o => o.Folio == fact.Folio);
-                }
                 List<Factura> lstFacturasAInsertar = new List<Factura>();
-                lstFacturasAInsertar.AddRange(lstFacturasAImprimir);
 
-                lstFacturasAImprimir.AddRange(lstFacturasYaImpresas);
-                lstFacturasAImprimir = lstFacturasAImprimir.OrderBy(o => o.Folio).ToList();
+                lstFacturasAInsertar.AddRange(_lstFacturas);
+                lstFacturasAInsertar = lstFacturasAInsertar.OrderBy(o => o.Folio).ToList();
 
                 //Insertar las facturas al Excel
                 ExcelDAL Excel_DAL = new ExcelDAL();
-                Excel_DAL.CargarDatos(lstFacturasAImprimir, "Control de reparto.xlsx");
+                Excel_DAL.CargarDatos(lstFacturasAInsertar, "Control de reparto.xlsx", datosComplementarios);
 
                 //Insertar facturas a la base de datos
-                SQLite_DAL.InsertarFacturasALaBD(lstFacturasAInsertar);
+                SQLite_DAL.InsertarFacturasALaBD(lstFacturasAInsertar, Folio, Encargado.ID_Personal, Chofer.ID_Personal);
 
                 //Mostrar el excel en pantalla
                 MessageBox.Show("El documento se ha creado con exito", "OK", 
@@ -292,38 +311,46 @@ namespace Control_de_Reparto.GUIs
 
         private void btnImprimirCobranza_Click(object sender, EventArgs e)
         {
-            ImprimirCobranza();
+            if (validarLista(gvListaCobranza))
+            {
+                ImprimirCobranza();
+            }
+            else
+            {
+                MessageBox.Show("No hay registros a imprimir...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         private void ImprimirCobranza()
         {
             btnImprimirCobranza.Enabled = false;
             try
-            {
+            {                
                 SqliteDAL SQLite_DAL = new SqliteDAL("ControlDeCobranza.db3");
-                //Recuperar todas las facturas impresas en el dia.
-                List<Factura> lstFacturasYaImpresas = SQLite_DAL.ObtenerFacturasImpresasDelDia();
+                //Obtener folio.
+                int Folio = SQLite_DAL.ObtenerFolio();
+
+                //Llenar datos complementarios
+                DatosComplementarios datosComplementarios = new DatosComplementarios();
+                datosComplementarios.FolioControl = Folio;
+                datosComplementarios.Sucursal = Properties.Settings.Default.Sucursal;
+                datosComplementarios.Responsable = Encargado.Nombre;
+                datosComplementarios.Chofer = Chofer.Nombre;
 
                 //Generar Lista de facturas a imprimir
                 List<Factura> lstFacturasAImprimir = new List<Factura>();
                 lstFacturasAImprimir.AddRange(_lstCobranza);
 
-                //Borrar las facturas que ya se imprimieron de las facturas tecleadas.
-                foreach (Factura fact in lstFacturasYaImpresas)
-                {
-                    lstFacturasAImprimir.RemoveAll(o => o.Folio == fact.Folio);
-                }
                 List<Factura> lstFacturasAInsertar = new List<Factura>();
                 lstFacturasAInsertar.AddRange(lstFacturasAImprimir);
 
-                lstFacturasAImprimir.AddRange(lstFacturasYaImpresas);
                 lstFacturasAImprimir = lstFacturasAImprimir.OrderBy(o => o.Folio).ToList();
 
                 //Insertar las facturas al Excel
                 ExcelDAL Excel_DAL = new ExcelDAL();
-                Excel_DAL.CargarDatos(lstFacturasAImprimir, "Control de cobranza.xlsx");
+                Excel_DAL.CargarDatos(lstFacturasAImprimir, "Control de cobranza.xlsx", datosComplementarios);
 
                 //Insertar facturas a la base de datos
-                SQLite_DAL.InsertarFacturasALaBD(lstFacturasAInsertar);
+                SQLite_DAL.InsertarFacturasALaBD(lstFacturasAInsertar, Folio, Encargado.ID_Personal, Chofer.ID_Personal);
 
                 //Mostrar el excel en pantalla
                 MessageBox.Show("El documento se ha creado con exito", "OK", 
@@ -345,6 +372,39 @@ namespace Control_de_Reparto.GUIs
             }
 
             btnImprimirCobranza.Enabled = true;
+        }
+
+        private void btnPersonal_Click(object sender, EventArgs e)
+        {
+            new ConfiguracionDePersonal().ShowDialog();
+            LlenarCombos();
+        }
+
+        private void txbFolioFactura_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                pbCargando.Visible = true;
+                segundoPlanoCobranza.RunWorkerAsync();
+            }
+        }
+
+        private void cbResponsables_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.Encargado = (Personal)cbResponsables.SelectedItem;
+        }
+
+        private void cbChoferes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.Chofer = (Personal)cbChoferes.SelectedItem;
+        }
+
+        private bool validarLista(DevExpress.XtraGrid.Views.Grid.GridView gv)
+        {
+            if (gv.RowCount == 0)
+                return false;
+            else
+                return true;
         }
     }
 }

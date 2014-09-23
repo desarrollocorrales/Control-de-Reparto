@@ -1,3 +1,5 @@
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\BD\ControlDeCobranza.db3
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\BD\ControlDeReparto.db3
 D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\x64\SQLite.Interop.dll
 D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\x86\SQLite.Interop.dll
 D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\Control de Reparto.exe.config
@@ -21,6 +23,7 @@ D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\Net
 D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\OfficeApi.xml
 D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\System.Data.SQLite.xml
 D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\bin\Debug\VBIDEApi.xml
+D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control_de_Reparto.GUIs.ConfiguracionDePersonal.resources
 D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control_de_Reparto.GUIs.ConfiguracionMicrosip.resources
 D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control_de_Reparto.GUIs.Frm_Reparto.resources
 D:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control_de_Reparto.Properties.Resources.resources

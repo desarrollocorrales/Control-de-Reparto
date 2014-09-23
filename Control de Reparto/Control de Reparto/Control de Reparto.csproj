@@ -97,6 +97,12 @@
     <Compile Include="DAL\ExcelDAL.cs" />
     <Compile Include="DAL\FirebirdDAL.cs" />
     <Compile Include="DAL\SqliteDAL.cs" />
+    <Compile Include="GUIs\ConfiguracionDePersonal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIs\ConfiguracionDePersonal.Designer.cs">
+      <DependentUpon>ConfiguracionDePersonal.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUIs\ConfiguracionMicrosip.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,9 +115,15 @@
     <Compile Include="GUIs\Frm_Reparto.Designer.cs">
       <DependentUpon>Frm_Reparto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Modelos\DatosComplementarios.cs" />
     <Compile Include="Modelos\Factura.cs" />
+    <Compile Include="Modelos\Personal.cs" />
+    <Compile Include="Modelos\Tipos.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GUIs\ConfiguracionDePersonal.resx">
+      <DependentUpon>ConfiguracionDePersonal.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUIs\ConfiguracionMicrosip.resx">
       <DependentUpon>ConfiguracionMicrosip.cs</DependentUpon>
     </EmbeddedResource>
@@ -130,10 +142,15 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
-    <None Include="BD\ControlDeCobranza.db3" />
-    <None Include="BD\ControlDeReparto.db3" />
+    <None Include="BD\ControlDeCobranza.db3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="BD\ControlDeReparto.db3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\DataSources\Control_de_Reparto.Modelos.Factura.datasource" />
+    <None Include="Properties\DataSources\Control_de_Reparto.Modelos.Personal.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -149,6 +166,7 @@
     <None Include="Resources\engranaje.30.png" />
     <None Include="cargando.gif" />
     <Content Include="Carrito.ico" />
+    <None Include="Resources\Add-Male-User-icon.png" />
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

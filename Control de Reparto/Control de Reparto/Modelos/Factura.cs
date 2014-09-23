@@ -7,6 +7,7 @@ namespace Control_de_Reparto.Modelos
 {
     public class Factura
     {
+        public int FolioControl { set; get; }
         public int ID_Factura { set; get; }
         public string Folio { set; get; }
         public string ClaveCliente { set; get; }
