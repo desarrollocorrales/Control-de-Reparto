@@ -128,15 +128,25 @@ namespace Control_de_Reparto.GUIs
 
                 if (dr == DialogResult.Yes)
                 {
-                    SqliteDAL sqlite = new SqliteDAL("ControlDeCobranza.db3");
-                    Personal personaModificada = new Personal();
-                    personaModificada.ID_Personal = persona.ID_Personal;
-                    personaModificada.Nombre = txbNombre.Text;
-                    personaModificada.Tipo = ((Tipos)cbTipos.SelectedItem).Id.ToString();
-                    sqlite.ModificarPersonal(personaModificada);
+                    string sTipo = ((Tipos)cbTipos.SelectedItem).Id.ToString();
+                    if (sTipo != "N")
+                    {
 
-                    MessageBox.Show("¡¡¡Modificación exitosa!!!");
-                    LlenarGrid();
+                        SqliteDAL sqlite = new SqliteDAL("ControlDeCobranza.db3");
+                        Personal personaModificada = new Personal();
+                        personaModificada.ID_Personal = persona.ID_Personal;
+                        personaModificada.Nombre = txbNombre.Text;
+                        personaModificada.Tipo = ((Tipos)cbTipos.SelectedItem).Id.ToString();
+                        sqlite.ModificarPersonal(personaModificada);
+
+                        MessageBox.Show("¡¡¡Modificación exitosa!!!");
+                        LlenarGrid();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Seleccione un tipo valido...", "Error", 
+                                         MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
 
             }
@@ -176,6 +186,19 @@ namespace Control_de_Reparto.GUIs
             {
                 MessageBox.Show(ex.Message, "Excepción", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void gvPersonal_SelectionChanged(object sender, DevExpress.Data.SelectionChangedEventArgs e)
+        {
+            
+        }
+
+        private void gvPersonal_RowClick(object sender, DevExpress.XtraGrid.Views.Grid.RowClickEventArgs e)
+        {
+            Personal personaSeleccionada = (Personal)gvPersonal.GetRow(gvPersonal.GetSelectedRows()[0]);
+            txbId.Text = personaSeleccionada.ID_Personal.ToString();
+            txbNombre.Text = personaSeleccionada.Nombre;
+            cbTipos.SelectedValue = personaSeleccionada.Tipo;
         }
     }
 }

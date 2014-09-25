@@ -205,6 +205,8 @@
             this.gvPersonal.OptionsView.EnableAppearanceEvenRow = true;
             this.gvPersonal.OptionsView.EnableAppearanceOddRow = true;
             this.gvPersonal.OptionsView.ShowGroupPanel = false;
+            this.gvPersonal.RowClick += new DevExpress.XtraGrid.Views.Grid.RowClickEventHandler(this.gvPersonal_RowClick);
+            this.gvPersonal.SelectionChanged += new DevExpress.Data.SelectionChangedEventHandler(this.gvPersonal_SelectionChanged);
             // 
             // colID_Personal
             // 

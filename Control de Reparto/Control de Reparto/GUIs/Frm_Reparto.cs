@@ -91,7 +91,8 @@ namespace Control_de_Reparto.GUIs
         {
             if (e.KeyChar == 13)
             {
-                BuscarFactura();
+                pbCargando.Visible = true;
+                SegundoPlano.RunWorkerAsync();
             }
         }
 
