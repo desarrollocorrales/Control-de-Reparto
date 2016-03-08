@@ -131,6 +131,7 @@
             this.txbFolioReparto.Name = "txbFolioReparto";
             this.txbFolioReparto.Size = new System.Drawing.Size(126, 23);
             this.txbFolioReparto.TabIndex = 3;
+            this.txbFolioReparto.TextChanged += new System.EventHandler(this.txbFolioReparto_TextChanged);
             this.txbFolioReparto.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbFolio_KeyPress);
             // 
             // btnBuscar

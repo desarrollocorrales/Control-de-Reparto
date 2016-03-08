@@ -78,11 +78,20 @@ namespace Control_de_Reparto.DAL
                                              clave_cliente, nombre_cliente, saldo_factura, folio_control,
                                              id_encargado, id_chofer)
                                         VALUES
-                                            ('{0}', {1}, '{2}', 
+                                            ('{0}',  {1}, '{2}', 
                                              '{3}', '{4}', {5}, {6}, {7}, {8})",
                                               factura.Folio, factura.Importe, DateTime.Today.ToString("yyyy-MM-dd"),
                                               factura.ClaveCliente, factura.NombreCliente, factura.Saldo,
                                               FolioControl, ID_Encargado, ID_Chofer);
+                    Comando.ExecuteNonQuery();
+
+                    Comando.CommandText =
+                        string.Format(@"INSERT INTO
+                                          folio_direccion
+                                            (folio_factura, calle, numero, interior, colonia, codigo_postal)
+                                        VALUES
+                                            ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}')",
+                                             factura.Folio, factura.sCalle, factura.sNumero, factura.sInterior, factura.sColonia, factura.sCodigoPostal);
                     Comando.ExecuteNonQuery();
                 }
 

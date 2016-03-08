@@ -21,6 +21,8 @@ namespace Control_de_Reparto.GUIs
         private List<Factura> _lstCobranza;
         private Personal Encargado;
         private Personal Chofer;
+
+        private List<Cliente> lstClientes;
         public Frm_Reparto()
         {
             InitializeComponent();
@@ -45,7 +47,15 @@ namespace Control_de_Reparto.GUIs
             oConfig.Load();
 
             lblSucursal.Text = oConfig.Sucursal;
+
+            CargarClientes();
         }
+        private void CargarClientes()
+        {
+            FirebirdDAL DAL = new FirebirdDAL();
+            lstClientes = DAL.getClientes();
+        }
+
         private void LlenarCombos()
         {
             SqliteDAL sqlite = new SqliteDAL("ControlDeCobranza.db3");
@@ -105,11 +115,29 @@ namespace Control_de_Reparto.GUIs
             Factura factura = _lstFacturas.Find(o => o.Folio == _FacturaEncontrada.Folio);
             if (factura == null)
             {
-                _lstFacturas.Add(_FacturaEncontrada);
-                gridFacturas.DataSource = _lstFacturas;
-                gvFacturas.RefreshData();
-                gvFacturas.BestFitColumns();
-                btnQuitar.Enabled = true;
+                //Para no Repetir Folios en la lista
+                if (_FacturaEncontrada.CapturaDireccion == true)
+                {
+                    Frm_CapturarDireccion frmCaptura = new Frm_CapturarDireccion(_FacturaEncontrada, lstClientes);
+                    frmCaptura.ShowDialog();
+                    _FacturaEncontrada = frmCaptura.factura;
+                }
+
+                if (_FacturaEncontrada.sCalle != string.Empty)
+                {
+                    _lstFacturas.Add(_FacturaEncontrada);
+                    gridFacturas.DataSource = _lstFacturas;
+                    gvFacturas.RefreshData();
+                    gvFacturas.BestFitColumns();
+                    btnQuitar.Enabled = true;
+                    txbFolioReparto.Text = string.Empty;
+                }
+                else
+                {
+                    MessageBox.Show("Debe Capturar la dirección del cliente...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                txbFolioReparto.Focus();
             }
         }
 
@@ -161,7 +189,7 @@ namespace Control_de_Reparto.GUIs
                 List<Factura> lstFacturasAInsertar = new List<Factura>();
 
                 lstFacturasAInsertar.AddRange(_lstFacturas);
-                lstFacturasAInsertar = lstFacturasAInsertar.OrderBy(o => o.Folio).ToList();
+                lstFacturasAInsertar = lstFacturasAInsertar.OrderBy(o => o.NombreCliente).ToList();
 
                 //Insertar las facturas al Excel
                 ExcelDAL Excel_DAL = new ExcelDAL();
@@ -217,6 +245,8 @@ namespace Control_de_Reparto.GUIs
                     gvFacturaEncontrada.RefreshData();
                     btnAgregar.Enabled = true;
                 }
+
+                btnAgregar.Focus();
             }
             else
             {
@@ -269,7 +299,7 @@ namespace Control_de_Reparto.GUIs
             }
             else
             {
-                MessageBox.Show("No se encontro ninguna factura con el Folio: " + txbFolioReparto.Text,
+                MessageBox.Show("No se encontro ninguna factura con el Folio: " + txbFolioFactura.Text,
                                 "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
@@ -344,7 +374,7 @@ namespace Control_de_Reparto.GUIs
                 List<Factura> lstFacturasAInsertar = new List<Factura>();
                 lstFacturasAInsertar.AddRange(lstFacturasAImprimir);
 
-                lstFacturasAImprimir = lstFacturasAImprimir.OrderBy(o => o.Folio).ToList();
+                lstFacturasAImprimir = lstFacturasAImprimir.OrderBy(o => o.NombreCliente).ToList();
 
                 //Insertar las facturas al Excel
                 ExcelDAL Excel_DAL = new ExcelDAL();
@@ -406,6 +436,11 @@ namespace Control_de_Reparto.GUIs
                 return false;
             else
                 return true;
+        }
+
+        private void txbFolioReparto_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

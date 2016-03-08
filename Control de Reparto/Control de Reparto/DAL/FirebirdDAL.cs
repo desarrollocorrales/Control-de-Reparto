@@ -64,7 +64,8 @@ namespace Control_de_Reparto.DAL
                                   IMPORTES_DOCTOS_CC.TIPO_IMPTE,
                                   IMPORTES_DOCTOS_CC.FECHA,
                                   COALESCE(CLAVES_CLIENTES.CLAVE_CLIENTE,'') AS CLAVE_CLIENTE,
-                                  CLIENTES.NOMBRE AS NOMBRE_CLIENTE
+                                  CLIENTES.NOMBRE AS NOMBRE_CLIENTE,
+                                  0 AS CapturaDireccion
                                 FROM
                                   IMPORTES_DOCTOS_CC
                                   INNER JOIN DOCTOS_CC ON (IMPORTES_DOCTOS_CC.DOCTO_CC_ACR_ID = DOCTOS_CC.DOCTO_CC_ID)
@@ -75,14 +76,15 @@ namespace Control_de_Reparto.DAL
 
                                 UNION ALL
 
-                        SELECT 
+                                SELECT 
                                   DOCTOS_PV.DOCTO_PV_ID AS ID,
                                   DOCTOS_PV.FOLIO,
                                   (DOCTOS_PV.TOTAL_IMPUESTOS + DOCTOS_PV.IMPORTE_NETO) AS IMPORTE,
                                   'C' AS TIPO_IMPTE,
                                   DOCTOS_PV.FECHA,
                                   'TICKET' AS CLAVE_CLIENTE,
-                                  '' AS NOMBRE_CLIENTE
+                                  '' AS NOMBRE_CLIENTE,
+                                  1 AS CapturaDireccion
                                 FROM
                                   DOCTOS_PV
                                 WHERE
@@ -99,6 +101,7 @@ namespace Control_de_Reparto.DAL
 
             Factura oFactura;
             List<Factura> lstFacturas = new List<Factura>();
+            bool bCapturaDireccion = false;
             foreach (DataRow row in tablaResultado.Rows)
             {
                 oFactura = new Factura();
@@ -116,6 +119,7 @@ namespace Control_de_Reparto.DAL
                     oFactura.Saldo = Convert.ToDecimal(row["IMPORTE"]);
                     oFactura.Importe = Convert.ToDecimal(row["IMPORTE"]);
                 }
+                bCapturaDireccion = Convert.ToBoolean(row["CapturaDireccion"]);
 
                 oFactura.Reimpresion = false;
                 lstFacturas.Add(oFactura);
@@ -134,6 +138,7 @@ namespace Control_de_Reparto.DAL
                 FacturaFinal.TipoImporte = 'C';
                 FacturaFinal.Importe = lstFacturas.Sum(o => o.Importe);
                 FacturaFinal.Saldo = lstFacturas.Sum(o => o.Saldo);
+                FacturaFinal.CapturaDireccion = bCapturaDireccion;
                 return FacturaFinal;
             }
             else
@@ -248,6 +253,50 @@ namespace Control_de_Reparto.DAL
             }
 
             return folio.ToString();
+        }
+
+        public List<Cliente> getClientes()
+        {
+            Conexion.Open();
+
+            Comando.Connection = Conexion;
+            Comando.CommandText =
+                string.Format(@"SELECT 
+                                  C.NOMBRE,
+                                  DC.NOMBRE_CALLE,
+                                  DC.NUM_EXTERIOR,
+                                  DC.NUM_INTERIOR,
+                                  DC.COLONIA,
+                                  DC.CODIGO_POSTAL
+                                FROM
+                                  DIRS_CLIENTES DC
+                                  INNER JOIN CLIENTES C ON (DC.CLIENTE_ID = C.CLIENTE_ID)
+                                WHERE
+                                  NOMBRE_CONSIG LIKE 'Dirección principal' 
+                                  AND NOMBRE_CALLE IS NOT NULL");
+            DataTable dtRespuesta = new DataTable();
+            
+            Adapter.SelectCommand = Comando;
+            Adapter.Fill(dtRespuesta);
+
+            Cliente cliente;
+            List<Cliente> lstClientes = new List<Cliente>();
+            foreach (DataRow row in dtRespuesta.Rows)
+            {
+                cliente = new Cliente();
+                cliente.sNombre = Convert.ToString(row["NOMBRE"]);
+                cliente.sCalle = Convert.ToString(row["NOMBRE_CALLE"]);
+                cliente.sNumero = Convert.ToString(row["NUM_EXTERIOR"]);
+                cliente.sInterior = Convert.ToString(row["NUM_INTERIOR"]);
+                cliente.sColonia = Convert.ToString(row["COLONIA"]);
+                cliente.sCodigoPostal = Convert.ToString(row["CODIGO_POSTAL"]);
+
+                lstClientes.Add(cliente);
+            }
+
+            Conexion.Close();
+
+            return lstClientes;
         }
     }
 }
