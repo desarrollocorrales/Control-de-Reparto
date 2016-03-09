@@ -230,5 +230,31 @@ namespace Control_de_Reparto.DAL
 
             Conexion.Close();
         }
+
+        public void ActualizarBaseDeDatos()
+        {
+            try
+            {
+                Conexion.Open();
+
+                Comando.Connection = Conexion;
+                Comando.CommandText = @"CREATE TABLE folio_direccion 
+                                            (folio_factura CHAR(9) NOT NULL , 
+                                             calle VARCHAR, 
+                                             numero VARCHAR, 
+                                             interior VARCHAR, 
+                                             colonia VARCHAR, 
+                                             codigo_postal VARCHAR)";
+                Comando.ExecuteNonQuery();
+
+                Conexion.Close();
+            }
+            catch (Exception ex)
+            {
+                if (Conexion.State != System.Data.ConnectionState.Closed)
+                    Conexion.Close();
+                throw ex;
+            }
+        }
     }
 }

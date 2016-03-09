@@ -44,6 +44,7 @@
             this.lblSucursal = new System.Windows.Forms.Label();
             this.txbSerie = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.btnActualizar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txbDatabase
@@ -181,11 +182,22 @@
             this.label6.TabIndex = 15;
             this.label6.Text = "Longitud de la serie:";
             // 
+            // btnActualizar
+            // 
+            this.btnActualizar.Location = new System.Drawing.Point(437, 240);
+            this.btnActualizar.Name = "btnActualizar";
+            this.btnActualizar.Size = new System.Drawing.Size(125, 32);
+            this.btnActualizar.TabIndex = 16;
+            this.btnActualizar.Text = "Actualizar BD";
+            this.btnActualizar.UseVisualStyleBackColor = true;
+            this.btnActualizar.Click += new System.EventHandler(this.btnActualizar_Click);
+            // 
             // ConfiguracionMicrosip
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(574, 332);
+            this.Controls.Add(this.btnActualizar);
             this.Controls.Add(this.txbSerie);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txbSucursal);
@@ -235,5 +247,6 @@
         private System.Windows.Forms.Label lblSucursal;
         private System.Windows.Forms.TextBox txbSerie;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnActualizar;
     }
 }

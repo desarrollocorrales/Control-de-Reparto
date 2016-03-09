@@ -81,5 +81,21 @@ namespace Control_de_Reparto.GUIs
             else
                 e.Handled = true;
         }
+
+        private void btnActualizar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SqliteDAL DALReparto = new SqliteDAL("ControlDeReparto.db3");
+                SqliteDAL DALCobranza = new SqliteDAL("ControlDeCobranza.db3");
+                DALCobranza.ActualizarBaseDeDatos();
+                DALReparto.ActualizarBaseDeDatos();
+                MessageBox.Show("Base de datos actualizada con exito!", "Actualizar", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }
