@@ -36,6 +36,7 @@
             this.btnBuscar = new System.Windows.Forms.Button();
             this.btnConfigurar = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnActualizarClientes = new System.Windows.Forms.Button();
             this.btnPersonal = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.cbChoferes = new System.Windows.Forms.ComboBox();
@@ -65,6 +66,9 @@
             this.pbCargando = new System.Windows.Forms.PictureBox();
             this.Pestañas = new System.Windows.Forms.TabControl();
             this.TabReparto = new System.Windows.Forms.TabPage();
+            this.btnBuscarCliente = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txbTelefono = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label6 = new System.Windows.Forms.Label();
             this.gridCobranza = new DevExpress.XtraGrid.GridControl();
@@ -156,6 +160,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnActualizarClientes);
             this.panel1.Controls.Add(this.btnPersonal);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.cbChoferes);
@@ -169,6 +174,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(784, 126);
             this.panel1.TabIndex = 6;
+            // 
+            // btnActualizarClientes
+            // 
+            this.btnActualizarClientes.Image = global::Control_de_Reparto.Properties.Resources.Refresh30;
+            this.btnActualizarClientes.Location = new System.Drawing.Point(727, 4);
+            this.btnActualizarClientes.Name = "btnActualizarClientes";
+            this.btnActualizarClientes.Size = new System.Drawing.Size(45, 63);
+            this.btnActualizarClientes.TabIndex = 36;
+            this.btnActualizarClientes.UseVisualStyleBackColor = true;
+            this.btnActualizarClientes.Click += new System.EventHandler(this.btnActualizarClientes_Click);
             // 
             // btnPersonal
             // 
@@ -443,6 +458,9 @@
             // 
             // TabReparto
             // 
+            this.TabReparto.Controls.Add(this.btnBuscarCliente);
+            this.TabReparto.Controls.Add(this.label7);
+            this.TabReparto.Controls.Add(this.txbTelefono);
             this.TabReparto.Controls.Add(this.btnQuitar);
             this.TabReparto.Controls.Add(this.gridFacturas);
             this.TabReparto.Controls.Add(this.label2);
@@ -459,6 +477,34 @@
             this.TabReparto.TabIndex = 0;
             this.TabReparto.Text = "Control de Reparto";
             this.TabReparto.UseVisualStyleBackColor = true;
+            // 
+            // btnBuscarCliente
+            // 
+            this.btnBuscarCliente.Location = new System.Drawing.Point(693, 6);
+            this.btnBuscarCliente.Name = "btnBuscarCliente";
+            this.btnBuscarCliente.Size = new System.Drawing.Size(75, 25);
+            this.btnBuscarCliente.TabIndex = 15;
+            this.btnBuscarCliente.Text = "Buscar";
+            this.btnBuscarCliente.UseVisualStyleBackColor = true;
+            this.btnBuscarCliente.Click += new System.EventHandler(this.btnBuscarCliente_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(492, 10);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(63, 16);
+            this.label7.TabIndex = 14;
+            this.label7.Text = "Teléfono:";
+            // 
+            // txbTelefono
+            // 
+            this.txbTelefono.Location = new System.Drawing.Point(561, 7);
+            this.txbTelefono.MaxLength = 10;
+            this.txbTelefono.Name = "txbTelefono";
+            this.txbTelefono.Size = new System.Drawing.Size(126, 23);
+            this.txbTelefono.TabIndex = 13;
+            this.txbTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txbTelefono_KeyPress);
             // 
             // tabPage2
             // 
@@ -786,5 +832,9 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cbResponsables;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnActualizarClientes;
+        private System.Windows.Forms.Button btnBuscarCliente;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txbTelefono;
     }
 }

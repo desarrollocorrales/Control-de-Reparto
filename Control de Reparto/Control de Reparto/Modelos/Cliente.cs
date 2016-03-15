@@ -13,5 +13,7 @@ namespace Control_de_Reparto.Modelos
         public string sInterior { set; get; }
         public string sColonia { set; get; }
         public string sCodigoPostal { set; get; }
+        public string sTelefono1 { set; get; }
+        public string sTelefono2 { set; get; }
     }
 }

@@ -267,7 +267,9 @@ namespace Control_de_Reparto.DAL
                                   DC.NUM_EXTERIOR,
                                   DC.NUM_INTERIOR,
                                   DC.COLONIA,
-                                  DC.CODIGO_POSTAL
+                                  DC.CODIGO_POSTAL,
+                                  DC.TELEFONO1,
+                                  DC.TELEFONO2  
                                 FROM
                                   DIRS_CLIENTES DC
                                   INNER JOIN CLIENTES C ON (DC.CLIENTE_ID = C.CLIENTE_ID)
@@ -290,7 +292,8 @@ namespace Control_de_Reparto.DAL
                 cliente.sInterior = Convert.ToString(row["NUM_INTERIOR"]);
                 cliente.sColonia = Convert.ToString(row["COLONIA"]);
                 cliente.sCodigoPostal = Convert.ToString(row["CODIGO_POSTAL"]);
-
+                cliente.sTelefono1 = Convert.ToString(row["TELEFONO1"]);
+                cliente.sTelefono2 = Convert.ToString(row["TELEFONO2"]);
                 lstClientes.Add(cliente);
             }
 

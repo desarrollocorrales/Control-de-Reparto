@@ -67,3 +67,4 @@ G:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug
 G:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control de Reparto.exe
 G:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control de Reparto.pdb
 G:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control_de_Reparto.GUIs.Frm_CapturarDireccion.resources
+G:\Github\Control-de-Reparto\Control de Reparto\Control de Reparto\obj\x86\Debug\Control_de_Reparto.GUIs.Frm_Clientes.resources

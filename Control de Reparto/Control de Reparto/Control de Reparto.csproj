@@ -115,6 +115,12 @@
     <Compile Include="GUIs\Frm_CapturarDireccion.Designer.cs">
       <DependentUpon>Frm_CapturarDireccion.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUIs\Frm_Clientes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUIs\Frm_Clientes.Designer.cs">
+      <DependentUpon>Frm_Clientes.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUIs\Frm_Reparto.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -136,6 +142,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUIs\Frm_CapturarDireccion.resx">
       <DependentUpon>Frm_CapturarDireccion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUIs\Frm_Clientes.resx">
+      <DependentUpon>Frm_Clientes.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUIs\Frm_Reparto.resx">
       <DependentUpon>Frm_Reparto.cs</DependentUpon>
@@ -159,6 +168,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Control_de_Reparto.Modelos.Cliente.datasource" />
     <None Include="Properties\DataSources\Control_de_Reparto.Modelos.Factura.datasource" />
     <None Include="Properties\DataSources\Control_de_Reparto.Modelos.Personal.datasource" />
     <None Include="Properties\Settings.settings">
@@ -177,6 +187,7 @@
     <None Include="cargando.gif" />
     <Content Include="Carrito.ico" />
     <None Include="Resources\Add-Male-User-icon.png" />
+    <None Include="Resources\Refresh30.png" />
     <Content Include="x64\SQLite.Interop.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

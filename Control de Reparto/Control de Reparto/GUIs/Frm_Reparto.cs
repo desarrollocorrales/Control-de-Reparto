@@ -54,6 +54,40 @@ namespace Control_de_Reparto.GUIs
         {
             FirebirdDAL DAL = new FirebirdDAL();
             lstClientes = DAL.getClientes();
+
+            /* Normalizar Telefonos*/
+            foreach (Cliente cliente in lstClientes)
+            {
+                var tel1 = cliente.sTelefono1;
+                var tel2 = cliente.sTelefono2;
+
+                if (tel1 != null)
+                {
+                    tel1 = tel1.Replace("-", string.Empty);
+                    tel1 = tel1.Replace(".", string.Empty);
+                    tel1 = tel1.Replace(" ", string.Empty);
+                    tel1 = tel1.Trim();
+                }
+                else
+                {
+                    tel1 = string.Empty;
+                }
+
+                if (tel2 != null)
+                {
+                    tel2 = tel2.Replace("-", string.Empty);
+                    tel2 = tel2.Replace(".", string.Empty);
+                    tel2 = tel2.Replace(" ", string.Empty);
+                    tel2 = tel2.Trim();
+                }
+                else
+                {
+                    tel2 = string.Empty;
+                }
+
+                cliente.sTelefono1 = tel1;
+                cliente.sTelefono2 = tel2;
+            }
         }
 
         private void LlenarCombos()
@@ -130,7 +164,6 @@ namespace Control_de_Reparto.GUIs
                     gvFacturas.RefreshData();
                     gvFacturas.BestFitColumns();
                     btnQuitar.Enabled = true;
-                    txbFolioReparto.Text = string.Empty;
                 }
                 else
                 {
@@ -442,5 +475,31 @@ namespace Control_de_Reparto.GUIs
         {
 
         }
+
+        private void btnActualizarClientes_Click(object sender, EventArgs e)
+        {
+            CargarClientes();
+            MessageBox.Show("¡Los clientes se han actualizado con exito!", "Actualizar Clientes", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void btnBuscarCliente_Click(object sender, EventArgs e)
+        {
+            var lstEncontrado = lstClientes.FindAll(o => o.sTelefono1.Contains(txbTelefono.Text) || o.sTelefono2.Contains(txbTelefono.Text));
+            
+            Frm_Clientes f = new Frm_Clientes();
+            f.lstClientes = lstEncontrado.OrderBy(o=>o.sNombre).ToList();
+            f.ShowDialog();
+        }
+
+        private void txbTelefono_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsDigit(e.KeyChar))
+                e.Handled = false;
+            else if (Char.IsControl(e.KeyChar))
+                e.Handled = false;
+            else
+                e.Handled = true;
+        }
+
     }
 }
