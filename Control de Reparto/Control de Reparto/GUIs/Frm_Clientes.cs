@@ -26,5 +26,43 @@ namespace Control_de_Reparto.GUIs
 
             label1.Text = "Clientes encontrados: " + lstClientes.Count;
         }
+
+        private void gvClientes_SelectionChanged(object sender, DevExpress.Data.SelectionChangedEventArgs e)
+        {
+            if (lstClientes.Count>0)
+            {
+                var index = gvClientes.GetSelectedRows();
+                {
+                    var lstAux = new List<Cliente>();
+
+                    var cliente = (Cliente)gvClientes.GetRow(index[0]);
+                    gridDetallesCliente.DataSource = null;
+
+                    lstAux.Add(cliente);
+
+                    gridDetallesCliente.DataSource = lstAux;
+                    gvDetallesCliente.BestFitColumns();
+                }
+            }
+        }
+
+        private void gridClientes_Click(object sender, EventArgs e)
+        {
+            if (lstClientes.Count > 0)
+            {
+                var index = gvClientes.GetSelectedRows();
+                {
+                    var lstAux = new List<Cliente>();
+
+                    var cliente = (Cliente)gvClientes.GetRow(index[0]);
+                    gridDetallesCliente.DataSource = null;
+
+                    lstAux.Add(cliente);
+
+                    gridDetallesCliente.DataSource = lstAux;
+                    gvDetallesCliente.BestFitColumns();
+                }
+            }
+        }
     }
 }
