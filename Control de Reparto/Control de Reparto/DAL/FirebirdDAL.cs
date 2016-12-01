@@ -167,7 +167,8 @@ namespace Control_de_Reparto.DAL
                                   INNER JOIN CLIENTES ON (DOCTOS_CC.CLIENTE_ID = CLIENTES.CLIENTE_ID)
                                   LEFT OUTER JOIN CLAVES_CLIENTES ON (CLIENTES.CLIENTE_ID = CLAVES_CLIENTES.CLIENTE_ID)
                                 WHERE
-                                  DOCTOS_CC.FOLIO LIKE '{0}'", FolioMicrosip);
+                                  DOCTOS_CC.FOLIO LIKE '{0}' 
+                                  AND IMPORTES_DOCTOS_CC.CANCELADO != 'S'", FolioMicrosip);
 
             /* Acceso a base de datos */
             Conexion.Open();
