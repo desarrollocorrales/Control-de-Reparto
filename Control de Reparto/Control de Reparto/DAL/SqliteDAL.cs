@@ -106,6 +106,7 @@ namespace Control_de_Reparto.DAL
             }
         }
 
+
         public List<Personal> ObtenerPersonal()
         {
             List<Personal> lstPersonal = new List<Personal>();
@@ -256,5 +257,93 @@ namespace Control_de_Reparto.DAL
                 throw ex;
             }
         }
+
+        public void ModificarSeleccion(int id_sucursal)
+        {
+
+            Conexion.Open();
+            Comando.Connection = Conexion;
+            Comando.CommandText =
+            string.Format(@"UPDATE sucursal SET seleccionado = '{0}' ", 0);
+            Comando.ExecuteNonQuery();
+            Conexion.Close();
+
+            Conexion.Open();
+            Comando.Connection = Conexion;
+            Comando.CommandText = string.Format(@"SELECT id_sucursal, descripcion, seleccionado FROM Sucursal where id_sucursal = {0} ", id_sucursal);
+
+            DataTable dt = new DataTable();
+            Adapter.SelectCommand = Comando;
+            Adapter.Fill(dt);
+
+            Sucursales sucursal;
+            foreach (DataRow row in dt.Rows)
+            {
+                sucursal = new Sucursales();
+                sucursal.id_sucursal = Convert.ToInt32(row["id_sucursal"]);
+                sucursal.descripcion = Convert.ToString(row["descripcion"]).Trim();
+                sucursal.seleccionado = Convert.ToInt32(row["seleccionado"]);
+            }
+            Conexion.Close();
+
+            Conexion.Open();
+            Comando.Connection = Conexion;
+            Comando.CommandText =
+            string.Format(@"UPDATE sucursal SET seleccionado = '{0}' WHERE id_sucursal= {1} ",
+                                   1, id_sucursal);
+            Comando.ExecuteNonQuery();
+
+            Conexion.Close();
+        }
+        public List<Sucursales> ObtenerSucursales()
+        {
+            List<Sucursales> lstSucursal = new List<Sucursales>();
+            Conexion.Open();
+            Comando.Connection = Conexion;
+            Comando.CommandText =
+            string.Format(@"SELECT id_sucursal, descripcion, seleccionado FROM Sucursal");
+
+            DataTable dt = new DataTable();
+            Adapter.SelectCommand = Comando;
+            Adapter.Fill(dt);
+
+            Sucursales sucursal;
+            foreach (DataRow row in dt.Rows)
+            {
+                sucursal = new Sucursales();
+                sucursal.id_sucursal = Convert.ToInt32(row["id_sucursal"]);
+                sucursal.descripcion = Convert.ToString(row["descripcion"]);
+                sucursal.seleccionado = Convert.ToInt32(row["seleccionado"]);
+
+                lstSucursal.Add(sucursal);
+            }
+            Conexion.Close();
+
+            return lstSucursal;
+
+        }
+
+        public string descripcion()
+        {
+            try
+            {
+                string res = string.Empty;
+                Conexion.Open();
+                Comando.Connection = Conexion;
+                Comando.CommandText =
+                string.Format(@"SELECT descripcion FROM sucursal where seleccionado = 1 ");
+                object obj = Comando.ExecuteScalar();
+
+                if(obj != null)
+                    res = obj.ToString();
+                
+                Conexion.Close();
+
+                return res;
+            }
+            catch (Exception x)
+            { throw x; }
+        }
+
     }
 }

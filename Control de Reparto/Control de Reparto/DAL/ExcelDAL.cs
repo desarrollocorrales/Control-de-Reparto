@@ -72,6 +72,8 @@ namespace Control_de_Reparto.DAL
 
             Libro.SaveAs(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\" + NombreArchivo);
 
+            Libro.PrintPreview();
+
             AplicacionExcel.Quit();
             AplicacionExcel.Dispose();
         }
