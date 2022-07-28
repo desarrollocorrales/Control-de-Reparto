@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Data.SQLite;
 using Control_de_Reparto.DAL;
 using Control_de_Reparto.Modelos;
+using ExportToExcel;
 
 namespace Control_de_Reparto.GUIs
 {
@@ -21,8 +22,10 @@ namespace Control_de_Reparto.GUIs
         private List<Factura> _lstCobranza;
         private Personal Encargado;
         private Personal Chofer;
-
+        string valorSel = string.Empty;
+        DatosComplementarios datosComplementarios;
         private List<Cliente> lstClientes;
+        frmConfig frmA; Frm_VistaPrevia frmVP;
         public Frm_Reparto()
         {
             InitializeComponent();
@@ -32,23 +35,44 @@ namespace Control_de_Reparto.GUIs
 
         private void btnConfigurar_Click(object sender, EventArgs e)
         {
-            new ConfiguracionMicrosip().ShowDialog();
-            Configuracion oConfig = new Configuracion();
-            oConfig.Load();
-
-            lblSucursal.Text = oConfig.Sucursal;
+            frmA = new frmConfig();
+            frmA.FormClosed += new FormClosedEventHandler(correctoBtn);
+            frmA.ShowDialog();            
         }
 
         private void Frm_Principal_Load(object sender, EventArgs e)
         {
-            LlenarCombos();
+            try
+            {
 
-            Configuracion oConfig = new Configuracion();
-            oConfig.Load();
+                LlenarCombos();
 
-            lblSucursal.Text = oConfig.Sucursal;
+                Configuracion oConfig = new Configuracion();
+                oConfig.Load();
 
-            CargarClientes();
+                if (oConfig.Servidor == "Server")
+                {
+                    frmA = new frmConfig();
+                    frmA.FormClosed += new FormClosedEventHandler(correcto);
+                    frmA.ShowDialog();
+                }
+                else
+                {
+                    SqliteDAL sqlite = new SqliteDAL("Sucursales.db3");
+                    lblSucursal.Text = sqlite.descripcion() + " " + oConfig.Sucursal;
+
+                    if (sqlite.descripcion() == "FRIOGOMEZ") btnActualizarClientes.Visible = false;
+                    else btnActualizarClientes.Visible = true;
+
+                    CargarClientes();
+                    gridCobranza.DataSource = gridFacturaEncontrada.DataSource = gridFacturas.DataSource = gridListaCobranza.DataSource = null;
+                }          
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         private void CargarClientes()
         {
@@ -99,12 +123,87 @@ namespace Control_de_Reparto.GUIs
 
             cbChoferes.DataSource = sqlite.ObtenerPersonalPorTipo('C');
             cbChoferes.DisplayMember = "Nombre";
+
+        }
+
+        private void correcto(object sender, EventArgs e)
+        {
+            try
+            {
+                if (frmA.DialogResult.ToString() == "OK")
+                {
+                    ConfiguracionMicrosip frmCon = new ConfiguracionMicrosip();
+                    var resultado = frmCon.ShowDialog();
+
+                    if (resultado == System.Windows.Forms.DialogResult.OK)
+                        Frm_Principal_Load(null, null);
+                }
+                else
+                {
+                    frmA.Close();
+                }
+            }
+            catch (Exception ex)
+            { throw ex; }
+        }
+
+        private void correctoBtn(object sender, EventArgs e)
+        {
+            try
+            {
+                if (frmA.DialogResult.ToString() == "OK")
+                {
+                    new ConfiguracionMicrosip().ShowDialog();
+                    Configuracion oConfig = new Configuracion();
+                    oConfig.Load();
+
+                    SqliteDAL sqlite = new SqliteDAL("Sucursales.db3");
+                    lblSucursal.Text = "";
+                    lblSucursal.Text = sqlite.descripcion() + " " + oConfig.Sucursal;
+
+                    if (sqlite.descripcion() == "FRIOGOMEZ") btnActualizarClientes.Visible = false;
+                    else btnActualizarClientes.Visible = true;
+                }
+                else
+                {
+                    frmA.Close();
+                }
+            }
+            catch (Exception ex)
+            { throw ex; }
+        }
+        private void correctoVP(object sender, EventArgs e)
+        {
+            try
+            {
+                if (frmVP.DialogResult.ToString() == "OK")
+                {
+                    Frm_Principal_Load(null, null);
+                }
+                else
+                {
+                    frmVP.Close();
+                }
+            }
+            catch (Exception ex)
+            { throw ex; }
         }
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            pbCargando.Visible = true;
-            SegundoPlano.RunWorkerAsync();
+            SqliteDAL sqlite = new SqliteDAL("Sucursales.db3");
+            string seleccion = sqlite.descripcion();
+
+            if (seleccion == string.Empty)
+            {
+                MessageBox.Show("Se debe Seleccionar una Sucursal, en el apartado de configuracion de personal");
+                return;
+            }
+            else
+            {
+                pbCargando.Visible = true;
+                SegundoPlano.RunWorkerAsync();
+            }
         }
         private void BuscarFactura()
         {
@@ -195,7 +294,9 @@ namespace Control_de_Reparto.GUIs
         {
             if (validarLista(gvFacturas))
             {
-                Imprimir();
+                frmVP = new Frm_VistaPrevia(_lstFacturas, Encargado, Chofer, "reparto");
+                frmVP.FormClosed += new FormClosedEventHandler(correctoVP);
+                frmVP.ShowDialog();
             }
             else
             {
@@ -212,7 +313,7 @@ namespace Control_de_Reparto.GUIs
                 int Folio = SQLite_DAL.ObtenerFolio();
 
                 //Llenar datos complementarios
-                DatosComplementarios datosComplementarios = new DatosComplementarios();
+                datosComplementarios = new DatosComplementarios();
                 datosComplementarios.FolioControl = Folio;
                 datosComplementarios.Sucursal = Properties.Settings.Default.Sucursal;
                 datosComplementarios.Responsable = Encargado.Nombre;
@@ -220,13 +321,32 @@ namespace Control_de_Reparto.GUIs
 
                 //Generar Lista de facturas a imprimir
                 List<Factura> lstFacturasAInsertar = new List<Factura>();
-
                 lstFacturasAInsertar.AddRange(_lstFacturas);
                 lstFacturasAInsertar = lstFacturasAInsertar.OrderBy(o => o.NombreCliente).ToList();
 
                 //Insertar las facturas al Excel
-                ExcelDAL Excel_DAL = new ExcelDAL();
-                Excel_DAL.CargarDatos(lstFacturasAInsertar, "Control de reparto.xlsx", datosComplementarios);
+
+                //Metodo Anterior
+                //ExcelDAL Excel_DAL = new ExcelDAL();
+
+                SqliteDAL sqlite = new SqliteDAL("Sucursales.db3");
+                valorSel = sqlite.descripcion();
+
+                formatoReparto obj_exp_doc = new formatoReparto();
+
+                string nombre_archivo;
+
+                if(valorSel == "CARNICERIA")
+                    nombre_archivo = @"\Control de reparto_15.xlsx";
+                else
+                    nombre_archivo = @"\Control de reparto_50.xlsx"; // + DateTime.Now.ToString("yyyyMMddhhmmssss") + ".xlsx";
+
+                //string excelFilename = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory) + nombre_archivo; 
+                // @"\Control de reparto" + DateTime.Now.ToString("yyyyMMddhhmmssss") + ".xlsx";
+                string archivoF = obj_exp_doc.formatoExcel(Environment.CurrentDirectory, Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), nombre_archivo, datosComplementarios, lstFacturasAInsertar, valorSel);
+                
+                //ExportToExcel.CreateExcelFile.CreateExcelDocument(ds, excelFilename);
+                //Excel_DAL.CargarDatos(lstFacturasAInsertar, "Control de reparto.xlsx", datosComplementarios);
 
                 //Insertar facturas a la base de datos
                 SQLite_DAL.InsertarFacturasALaBD(lstFacturasAInsertar, Folio, Encargado.ID_Personal, Chofer.ID_Personal);
@@ -235,7 +355,7 @@ namespace Control_de_Reparto.GUIs
                 MessageBox.Show("El documento se ha creado con exito", "OK", 
                                  MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                System.Diagnostics.Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Control de reparto.xlsx");
+                System.Diagnostics.Process.Start(archivoF);
             }
             catch (Exception ex)
             {
@@ -251,6 +371,99 @@ namespace Control_de_Reparto.GUIs
             }
 
             btnImprimir.Enabled = true;
+        }
+
+        private void btnImprimirCobranza_Click(object sender, EventArgs e)
+        {
+            if (validarLista(gvListaCobranza))
+            {
+                frmVP = new Frm_VistaPrevia(_lstCobranza, Encargado, Chofer, "cobranza");
+                frmVP.FormClosed += new FormClosedEventHandler(correctoVP);
+                frmVP.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("No hay registros a imprimir...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void ImprimirCobranza()
+        {
+            btnImprimirCobranza.Enabled = false;
+            try
+            {
+                SqliteDAL SQLite_DAL = new SqliteDAL("ControlDeCobranza.db3");
+                //Obtener folio.
+                int Folio = SQLite_DAL.ObtenerFolio();
+
+                //Llenar datos complementarios
+                datosComplementarios = new DatosComplementarios();
+                datosComplementarios.FolioControl = Folio;
+                datosComplementarios.Sucursal = Properties.Settings.Default.Sucursal;
+                datosComplementarios.Responsable = Encargado.Nombre;
+                datosComplementarios.Chofer = Chofer.Nombre;
+
+                //Generar Lista de facturas a imprimir
+                List<Factura> lstFacturasAImprimir = new List<Factura>();
+                lstFacturasAImprimir.AddRange(_lstCobranza);
+
+                List<Factura> lstFacturasAInsertar = new List<Factura>();
+                lstFacturasAInsertar.AddRange(lstFacturasAImprimir);
+
+                lstFacturasAImprimir = lstFacturasAImprimir.OrderBy(o => o.NombreCliente).ToList();
+
+                SqliteDAL sqlite = new SqliteDAL("Sucursales.db3");
+                valorSel = sqlite.descripcion();
+                formatoReparto obj_exp_doc = new formatoReparto();
+
+                string nombre_archivo;
+
+                if (valorSel == "CARNICERIA")
+                    nombre_archivo = @"\Control de cobranza_15.xlsx";
+                else
+                    nombre_archivo = @"\Control de cobranza_50.xlsx"; // + DateTime.Now.ToString("yyyyMMddhhmmssss") + ".xlsx";
+
+                string archivoF = obj_exp_doc.formatoExcel(Environment.CurrentDirectory, Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), nombre_archivo, datosComplementarios, lstFacturasAInsertar, valorSel);
+
+                //Insertar facturas a la base de datos
+                SQLite_DAL.InsertarFacturasALaBD(lstFacturasAInsertar, Folio, Encargado.ID_Personal, Chofer.ID_Personal);
+
+
+
+                ////Insertar las facturas al Excel
+                //CreateExcelFile export = new CreateExcelFile();
+                ////ExcelDAL Excel_DAL = new ExcelDAL();
+                //DataSet ds = new DataSet();
+
+                //DataTable dt = new DataTable();
+                //dt = lstFacturasAImprimir.ToDataTable(); // ToDataTable(lstFacturasAImprimir);
+                //ds.Tables.Add(dt);
+
+                //string excelFilename = "C:\\Users\\Guillermo\\Desktop\\HOJA CALCULO\\ejemploCreacion.xlsx";
+                //CreateExcelFile.CreateExcelDocument(ds, excelFilename);
+                ////Excel_DAL.CargarDatos(lstFacturasAImprimir, "Control de cobranza.xlsx", datosComplementarios);
+                
+
+                //Mostrar el excel en pantalla
+                MessageBox.Show("El documento se ha creado con exito", "OK",
+                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                System.Diagnostics.Process.Start(archivoF);
+                //System.Diagnostics.Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Control de cobranza.xlsx");
+            }
+            catch (Exception ex)
+            {
+                StringBuilder sb = new StringBuilder();
+                Exception e = ex;
+                while (e != null)
+                {
+                    sb.AppendLine(e.Message);
+                    e = e.InnerException;
+                }
+
+                MessageBox.Show(sb.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            btnImprimirCobranza.Enabled = true;
         }
 
         private void SegundoPlano_DoWork(object sender, DoWorkEventArgs e)
@@ -300,8 +513,15 @@ namespace Control_de_Reparto.GUIs
 
         private void btnBuscarCobranza_Click(object sender, EventArgs e)
         {
-            pbCargando.Visible = true;
-            segundoPlanoCobranza.RunWorkerAsync();
+            SqliteDAL sqlite = new SqliteDAL("Sucursales.db3");
+            string seleccion = sqlite.descripcion();
+
+            if (seleccion == string.Empty) throw new Exception("Se debe Seleccionar una Sucursal, en el apartado de configuracion de personal");
+            else
+            {
+                pbCargando.Visible = true;
+                segundoPlanoCobranza.RunWorkerAsync();
+            }            
         }
 
         private void segundoPlanoCobranza_DoWork(object sender, DoWorkEventArgs e)
@@ -373,75 +593,20 @@ namespace Control_de_Reparto.GUIs
             }
         }
 
-        private void btnImprimirCobranza_Click(object sender, EventArgs e)
-        {
-            if (validarLista(gvListaCobranza))
-            {
-                ImprimirCobranza();
-            }
-            else
-            {
-                MessageBox.Show("No hay registros a imprimir...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        private void ImprimirCobranza()
-        {
-            btnImprimirCobranza.Enabled = false;
-            try
-            {                
-                SqliteDAL SQLite_DAL = new SqliteDAL("ControlDeCobranza.db3");
-                //Obtener folio.
-                int Folio = SQLite_DAL.ObtenerFolio();
-
-                //Llenar datos complementarios
-                DatosComplementarios datosComplementarios = new DatosComplementarios();
-                datosComplementarios.FolioControl = Folio;
-                datosComplementarios.Sucursal = Properties.Settings.Default.Sucursal;
-                datosComplementarios.Responsable = Encargado.Nombre;
-                datosComplementarios.Chofer = Chofer.Nombre;
-
-                //Generar Lista de facturas a imprimir
-                List<Factura> lstFacturasAImprimir = new List<Factura>();
-                lstFacturasAImprimir.AddRange(_lstCobranza);
-
-                List<Factura> lstFacturasAInsertar = new List<Factura>();
-                lstFacturasAInsertar.AddRange(lstFacturasAImprimir);
-
-                lstFacturasAImprimir = lstFacturasAImprimir.OrderBy(o => o.NombreCliente).ToList();
-
-                //Insertar las facturas al Excel
-                ExcelDAL Excel_DAL = new ExcelDAL();
-                Excel_DAL.CargarDatos(lstFacturasAImprimir, "Control de cobranza.xlsx", datosComplementarios);
-
-                //Insertar facturas a la base de datos
-                SQLite_DAL.InsertarFacturasALaBD(lstFacturasAInsertar, Folio, Encargado.ID_Personal, Chofer.ID_Personal);
-
-                //Mostrar el excel en pantalla
-                MessageBox.Show("El documento se ha creado con exito", "OK", 
-                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                System.Diagnostics.Process.Start(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\Control de cobranza.xlsx");
-            }
-            catch (Exception ex)
-            {
-                StringBuilder sb = new StringBuilder();
-                Exception e = ex;
-                while (e != null)
-                {
-                    sb.AppendLine(e.Message);
-                    e = e.InnerException;
-                }
-
-                MessageBox.Show(sb.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-            btnImprimirCobranza.Enabled = true;
-        }
-
         private void btnPersonal_Click(object sender, EventArgs e)
         {
             new ConfiguracionDePersonal().ShowDialog();
             LlenarCombos();
+
+            Configuracion oConfig = new Configuracion();
+            oConfig.Load();
+            SqliteDAL sqlite = new SqliteDAL("Sucursales.db3");
+            lblSucursal.Text = "";
+            lblSucursal.Text = sqlite.descripcion() + " " + oConfig.Sucursal;
+
+            if (sqlite.descripcion() == "FRIOGOMEZ") btnActualizarClientes.Visible = false;
+            else btnActualizarClientes.Visible = true;
+
         }
 
         private void txbFolioFactura_KeyPress(object sender, KeyPressEventArgs e)

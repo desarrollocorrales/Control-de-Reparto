@@ -47,6 +47,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.cbTipos = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cmbSucursal = new System.Windows.Forms.ComboBox();
+            this.btnGuardar = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridPersonal)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.personalBindingSource)).BeginInit();
@@ -79,10 +82,10 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gridPersonal.DataSource = this.personalBindingSource;
-            this.gridPersonal.Location = new System.Drawing.Point(12, 78);
+            this.gridPersonal.Location = new System.Drawing.Point(12, 119);
             this.gridPersonal.MainView = this.gvPersonal;
             this.gridPersonal.Name = "gridPersonal";
-            this.gridPersonal.Size = new System.Drawing.Size(507, 322);
+            this.gridPersonal.Size = new System.Drawing.Size(507, 385);
             this.gridPersonal.TabIndex = 3;
             this.gridPersonal.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvPersonal});
@@ -232,7 +235,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 59);
+            this.label2.Location = new System.Drawing.Point(12, 100);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(127, 16);
             this.label2.TabIndex = 4;
@@ -240,7 +243,7 @@
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(525, 78);
+            this.btnAgregar.Location = new System.Drawing.Point(525, 119);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 30);
             this.btnAgregar.TabIndex = 5;
@@ -250,7 +253,7 @@
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(606, 78);
+            this.btnModificar.Location = new System.Drawing.Point(606, 119);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 30);
             this.btnModificar.TabIndex = 6;
@@ -260,7 +263,7 @@
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(687, 78);
+            this.btnEliminar.Location = new System.Drawing.Point(687, 119);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(75, 30);
             this.btnEliminar.TabIndex = 7;
@@ -271,7 +274,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(525, 117);
+            this.label3.Location = new System.Drawing.Point(525, 158);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(25, 16);
             this.label3.TabIndex = 8;
@@ -280,14 +283,14 @@
             // txbId
             // 
             this.txbId.Enabled = false;
-            this.txbId.Location = new System.Drawing.Point(525, 136);
+            this.txbId.Location = new System.Drawing.Point(525, 177);
             this.txbId.Name = "txbId";
             this.txbId.Size = new System.Drawing.Size(97, 23);
             this.txbId.TabIndex = 9;
             // 
             // txbNombre
             // 
-            this.txbNombre.Location = new System.Drawing.Point(525, 181);
+            this.txbNombre.Location = new System.Drawing.Point(525, 222);
             this.txbNombre.Name = "txbNombre";
             this.txbNombre.Size = new System.Drawing.Size(237, 23);
             this.txbNombre.TabIndex = 11;
@@ -295,7 +298,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(525, 162);
+            this.label4.Location = new System.Drawing.Point(525, 203);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(58, 16);
             this.label4.TabIndex = 10;
@@ -304,7 +307,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(525, 207);
+            this.label5.Location = new System.Drawing.Point(525, 248);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(38, 16);
             this.label5.TabIndex = 12;
@@ -314,16 +317,47 @@
             // 
             this.cbTipos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTipos.FormattingEnabled = true;
-            this.cbTipos.Location = new System.Drawing.Point(525, 226);
+            this.cbTipos.Location = new System.Drawing.Point(525, 267);
             this.cbTipos.Name = "cbTipos";
             this.cbTipos.Size = new System.Drawing.Size(171, 24);
             this.cbTipos.TabIndex = 13;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(12, 74);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(167, 16);
+            this.label8.TabIndex = 40;
+            this.label8.Text = "Selecciona Establecimiento:";
+            // 
+            // cmbSucursal
+            // 
+            this.cmbSucursal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbSucursal.FormattingEnabled = true;
+            this.cmbSucursal.Location = new System.Drawing.Point(185, 71);
+            this.cmbSucursal.Name = "cmbSucursal";
+            this.cmbSucursal.Size = new System.Drawing.Size(334, 24);
+            this.cmbSucursal.TabIndex = 39;
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.Location = new System.Drawing.Point(525, 71);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(73, 24);
+            this.btnGuardar.TabIndex = 41;
+            this.btnGuardar.Text = "Guardar";
+            this.btnGuardar.UseVisualStyleBackColor = true;
+            this.btnGuardar.Click += new System.EventHandler(this.btnGuardar_Click);
             // 
             // ConfiguracionDePersonal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(774, 412);
+            this.ClientSize = new System.Drawing.Size(774, 533);
+            this.Controls.Add(this.btnGuardar);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.cmbSucursal);
             this.Controls.Add(this.cbTipos);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txbNombre);
@@ -376,5 +410,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox cbTipos;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox cmbSucursal;
+        private System.Windows.Forms.Button btnGuardar;
     }
 }

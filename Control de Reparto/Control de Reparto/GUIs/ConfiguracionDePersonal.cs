@@ -21,6 +21,7 @@ namespace Control_de_Reparto.GUIs
         private void ConfiguracionDePersonal_Load(object sender, EventArgs e)
         {
             LlenarComboTipos();
+            LlenaSucursal();
         }
 
         private void LlenarComboTipos()
@@ -32,6 +33,28 @@ namespace Control_de_Reparto.GUIs
             cbTipos.DisplayMember = "Nombre";
             cbTipos.ValueMember = "Id";
             cbTipos.SelectedIndex = 0;
+        }
+
+        private void LlenaSucursal()
+        {
+            try
+            {
+                SqliteDAL sqliteS = new SqliteDAL("Sucursales.db3");
+                cmbSucursal.DataSource = sqliteS.ObtenerSucursales();
+                cmbSucursal.DisplayMember = "descripcion";
+
+                int x = 0;
+                foreach (Sucursales elemento in ((List<Sucursales>)cmbSucursal.DataSource))
+                {
+                    if (elemento.seleccionado == 1)
+                    { cmbSucursal.SelectedIndex = x; break; }
+                    x++;
+                }
+            }
+            catch (Exception x)
+            {
+                throw x;
+            }
         }
 
         private void validarBotones()
@@ -107,6 +130,7 @@ namespace Control_de_Reparto.GUIs
                 MessageBox.Show("Seleccione un tipo valido...", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         private void btnModificar_Click(object sender, EventArgs e)
         {
@@ -199,6 +223,25 @@ namespace Control_de_Reparto.GUIs
             txbId.Text = personaSeleccionada.ID_Personal.ToString();
             txbNombre.Text = personaSeleccionada.Nombre;
             cbTipos.SelectedValue = personaSeleccionada.Tipo;
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                SqliteDAL sqlite = new SqliteDAL("Sucursales.db3");
+                int ID = ((Sucursales)cmbSucursal.SelectedItem).id_sucursal;
+                sqlite.ModificarSeleccion(ID);
+
+                LlenaSucursal();
+
+                MessageBox.Show("Se ha guardado tu selección");
+
+            }
+            catch (Exception x)
+            {
+                throw x;
+            }
         }
     }
 }

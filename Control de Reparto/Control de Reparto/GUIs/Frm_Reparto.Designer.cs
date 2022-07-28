@@ -112,7 +112,7 @@
             // 
             this.lblTitulo.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblTitulo.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitulo.Location = new System.Drawing.Point(63, 9);
+            this.lblTitulo.Location = new System.Drawing.Point(77, 9);
             this.lblTitulo.Name = "lblTitulo";
             this.lblTitulo.Size = new System.Drawing.Size(658, 30);
             this.lblTitulo.TabIndex = 1;
@@ -172,13 +172,13 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(784, 126);
+            this.panel1.Size = new System.Drawing.Size(812, 126);
             this.panel1.TabIndex = 6;
             // 
             // btnActualizarClientes
             // 
             this.btnActualizarClientes.Image = global::Control_de_Reparto.Properties.Resources.Refresh30;
-            this.btnActualizarClientes.Location = new System.Drawing.Point(727, 4);
+            this.btnActualizarClientes.Location = new System.Drawing.Point(763, 4);
             this.btnActualizarClientes.Name = "btnActualizarClientes";
             this.btnActualizarClientes.Size = new System.Drawing.Size(45, 63);
             this.btnActualizarClientes.TabIndex = 36;
@@ -198,7 +198,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(205, 97);
+            this.label5.Location = new System.Drawing.Point(209, 96);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(51, 16);
             this.label5.TabIndex = 34;
@@ -208,7 +208,7 @@
             // 
             this.cbChoferes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbChoferes.FormattingEnabled = true;
-            this.cbChoferes.Location = new System.Drawing.Point(262, 94);
+            this.cbChoferes.Location = new System.Drawing.Point(266, 93);
             this.cbChoferes.Name = "cbChoferes";
             this.cbChoferes.Size = new System.Drawing.Size(352, 24);
             this.cbChoferes.TabIndex = 33;
@@ -217,7 +217,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(171, 67);
+            this.label4.Location = new System.Drawing.Point(175, 66);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(85, 16);
             this.label4.TabIndex = 32;
@@ -227,7 +227,7 @@
             // 
             this.cbResponsables.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbResponsables.FormattingEnabled = true;
-            this.cbResponsables.Location = new System.Drawing.Point(262, 64);
+            this.cbResponsables.Location = new System.Drawing.Point(266, 63);
             this.cbResponsables.Name = "cbResponsables";
             this.cbResponsables.Size = new System.Drawing.Size(352, 24);
             this.cbResponsables.TabIndex = 31;
@@ -237,11 +237,10 @@
             // 
             this.lblSucursal.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lblSucursal.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSucursal.Location = new System.Drawing.Point(67, 39);
+            this.lblSucursal.Location = new System.Drawing.Point(114, 38);
             this.lblSucursal.Name = "lblSucursal";
-            this.lblSucursal.Size = new System.Drawing.Size(654, 22);
+            this.lblSucursal.Size = new System.Drawing.Size(643, 22);
             this.lblSucursal.TabIndex = 6;
-            this.lblSucursal.Text = "Sucursal";
             this.lblSucursal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // gridFacturaEncontrada
@@ -252,7 +251,7 @@
             this.gridFacturaEncontrada.Location = new System.Drawing.Point(7, 37);
             this.gridFacturaEncontrada.MainView = this.gvFacturaEncontrada;
             this.gridFacturaEncontrada.Name = "gridFacturaEncontrada";
-            this.gridFacturaEncontrada.Size = new System.Drawing.Size(681, 48);
+            this.gridFacturaEncontrada.Size = new System.Drawing.Size(709, 48);
             this.gridFacturaEncontrada.TabIndex = 7;
             this.gridFacturaEncontrada.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvFacturaEncontrada});
@@ -323,7 +322,7 @@
             this.gridFacturas.Location = new System.Drawing.Point(7, 110);
             this.gridFacturas.MainView = this.gvFacturas;
             this.gridFacturas.Name = "gridFacturas";
-            this.gridFacturas.Size = new System.Drawing.Size(681, 250);
+            this.gridFacturas.Size = new System.Drawing.Size(709, 252);
             this.gridFacturas.TabIndex = 8;
             this.gridFacturas.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvFacturas});
@@ -393,11 +392,11 @@
             // btnImprimir
             // 
             this.btnImprimir.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.btnImprimir.Location = new System.Drawing.Point(351, 366);
+            this.btnImprimir.Location = new System.Drawing.Point(371, 368);
             this.btnImprimir.Name = "btnImprimir";
-            this.btnImprimir.Size = new System.Drawing.Size(75, 30);
+            this.btnImprimir.Size = new System.Drawing.Size(116, 30);
             this.btnImprimir.TabIndex = 10;
-            this.btnImprimir.Text = "Imprimir";
+            this.btnImprimir.Text = "Vista Previa";
             this.btnImprimir.UseVisualStyleBackColor = true;
             this.btnImprimir.Click += new System.EventHandler(this.btnImprimir_Click);
             // 
@@ -405,7 +404,7 @@
             // 
             this.btnAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAgregar.Enabled = false;
-            this.btnAgregar.Location = new System.Drawing.Point(694, 110);
+            this.btnAgregar.Location = new System.Drawing.Point(722, 110);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 48);
             this.btnAgregar.TabIndex = 11;
@@ -417,7 +416,7 @@
             // 
             this.btnQuitar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnQuitar.Enabled = false;
-            this.btnQuitar.Location = new System.Drawing.Point(694, 164);
+            this.btnQuitar.Location = new System.Drawing.Point(722, 164);
             this.btnQuitar.Name = "btnQuitar";
             this.btnQuitar.Size = new System.Drawing.Size(75, 48);
             this.btnQuitar.TabIndex = 12;
@@ -434,7 +433,7 @@
             // 
             this.pbCargando.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.pbCargando.Image = global::Control_de_Reparto.Properties.Resources.cargando;
-            this.pbCargando.Location = new System.Drawing.Point(308, 234);
+            this.pbCargando.Location = new System.Drawing.Point(322, 234);
             this.pbCargando.Name = "pbCargando";
             this.pbCargando.Size = new System.Drawing.Size(169, 94);
             this.pbCargando.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
@@ -452,7 +451,7 @@
             this.Pestañas.Location = new System.Drawing.Point(0, 132);
             this.Pestañas.Name = "Pestañas";
             this.Pestañas.SelectedIndex = 0;
-            this.Pestañas.Size = new System.Drawing.Size(784, 430);
+            this.Pestañas.Size = new System.Drawing.Size(812, 432);
             this.Pestañas.TabIndex = 14;
             this.Pestañas.SelectedIndexChanged += new System.EventHandler(this.Pestañas_SelectedIndexChanged);
             // 
@@ -473,7 +472,7 @@
             this.TabReparto.Location = new System.Drawing.Point(4, 25);
             this.TabReparto.Name = "TabReparto";
             this.TabReparto.Padding = new System.Windows.Forms.Padding(3);
-            this.TabReparto.Size = new System.Drawing.Size(776, 401);
+            this.TabReparto.Size = new System.Drawing.Size(804, 403);
             this.TabReparto.TabIndex = 0;
             this.TabReparto.Text = "Control de Reparto";
             this.TabReparto.UseVisualStyleBackColor = true;
@@ -520,7 +519,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(776, 401);
+            this.tabPage2.Size = new System.Drawing.Size(804, 403);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Control de Cobranza";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -627,9 +626,9 @@
             this.btnImprimirCobranza.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnImprimirCobranza.Location = new System.Drawing.Point(351, 366);
             this.btnImprimirCobranza.Name = "btnImprimirCobranza";
-            this.btnImprimirCobranza.Size = new System.Drawing.Size(75, 30);
+            this.btnImprimirCobranza.Size = new System.Drawing.Size(106, 30);
             this.btnImprimirCobranza.TabIndex = 18;
-            this.btnImprimirCobranza.Text = "Imprimir";
+            this.btnImprimirCobranza.Text = "Vista Previa";
             this.btnImprimirCobranza.UseVisualStyleBackColor = true;
             this.btnImprimirCobranza.Click += new System.EventHandler(this.btnImprimirCobranza_Click);
             // 
@@ -739,7 +738,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 562);
+            this.ClientSize = new System.Drawing.Size(812, 610);
             this.Controls.Add(this.pbCargando);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.Pestañas);
@@ -747,7 +746,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Frm_Reparto";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Control de reparto";
             this.Load += new System.EventHandler(this.Frm_Principal_Load);
             this.panel1.ResumeLayout(false);
